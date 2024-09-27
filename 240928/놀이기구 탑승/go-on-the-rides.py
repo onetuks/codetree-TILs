@@ -55,6 +55,6 @@ total_score = 0
 for i in range(n):
     for j in range(n):
         like_cnt = get_like_cnt(i, j)
-        total_score += pow(10, like_cnt - 1) if like_cnt > 0 else 0
+        total_score += int(pow(10, like_cnt - 1))
 
 print(total_score)
