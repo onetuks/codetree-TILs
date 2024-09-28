@@ -29,6 +29,13 @@ def seat(seq):
             elif like_cnt == max_like_cnt and void_cnt > max_void_cnt:
                 max_void_cnt = void_cnt
                 loc = [i, j]
+
+    if -1 in loc:
+        for i in range(n):
+            for j in range(n):
+                if matrix[i][j] == 0:
+                    return [i, j]
+    
     return loc
 
 
@@ -59,10 +66,6 @@ def main():
     for seq in sequence:
         x, y = seat(seq)
         matrix[x][y] = seq
-
-        # for mat in matrix:
-        #     print(mat)
-        # print()
 
     answer = 0
     for i in range(n):
