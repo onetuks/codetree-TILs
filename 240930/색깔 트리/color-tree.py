@@ -21,9 +21,10 @@ def add(m_id, p_id, color, max_depth):
     parent_id = p_id
     depth = 1
     while parent_id != -1:
-        if nodes[parent_id].max_depth < depth:
+        if nodes[parent_id].max_depth <= depth:
             return
         parent_id = nodes[parent_id].p_id
+        depth += 1
     nodes[p_id].children.append(curr_node)
     nodes[m_id] = curr_node
     
@@ -62,7 +63,11 @@ def main():
             for node in nodes.values():
                 color_set = calculate(node, set())
                 value += len(color_set) ** 2
-            print(value) 
+            print(value)
+
+        # for node in nodes.values():
+        #     print(node)
+        # print()
 
 
 main()
