@@ -1,3 +1,4 @@
-a, b, c = map(int, input().split())
+a, b = map(int, input().split())
+c = int(input())
 
 print(a, b, c)
