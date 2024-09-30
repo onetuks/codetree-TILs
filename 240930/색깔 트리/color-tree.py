@@ -1,4 +1,5 @@
 nodes = dict()
+vals = dict()
 
 
 class Node:
@@ -40,14 +41,11 @@ def search(m_id):
 
 
 def calculate(node):
-    val, cols = 0, set([node.color])
-    if not node.children:
-        return [1, cols]
+    color_set = set([node.color])
     for child in node.children:
-        rtn = calculate(child)
-        val += rtn[0]
-        cols = cols | rtn[1]
-    return [val + len(cols) ** 2, cols]
+        color_set = color_set | calculate(child)
+    vals[node.m_id] = len(color_set) ** 2
+    return color_set
 
 
 def main():
@@ -64,8 +62,9 @@ def main():
             search(line[1])
         elif line[0] == 400:
             root = [node for node in nodes.values() if node.p_id == -1][0]
-            rtn = calculate(root)
-            print(rtn[0])
+            calculate(root)
+            value = sum([val for val in vals.values()])
+            print(value)
 
 
 main()
