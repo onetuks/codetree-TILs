@@ -58,7 +58,7 @@ def main():
             for node in nodes.values():
                 color_set = calculate(node, set())
                 value += len(color_set) ** 2
-            print(value)
+            print(value) 
 
 
 main()
