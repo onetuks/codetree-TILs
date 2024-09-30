@@ -39,11 +39,15 @@ def search(m_id):
     print(nodes[m_id].color)
 
 
-def calculate(node, color_set):
-    color_set.add(node.color)
+def calculate(node):
+    val, cols = 0, set([node.color])
+    if not node.children:
+        return [1, cols]
     for child in node.children:
-        color_set = color_set | calculate(child, color_set)
-    return color_set
+        rtn = calculate(child)
+        val += rtn[0]
+        cols = cols | rtn[1]
+    return [val + len(cols) ** 2, cols]
 
 
 def main():
@@ -59,15 +63,9 @@ def main():
         elif line[0] == 300:
             search(line[1])
         elif line[0] == 400:
-            value = 0
-            for node in nodes.values():
-                color_set = calculate(node, set())
-                value += len(color_set) ** 2
-            print(value)
-
-        # for node in nodes.values():
-        #     print(node)
-        # print()
+            root = [node for node in nodes.values() if node.p_id == -1][0]
+            rtn = calculate(root)
+            print(rtn[0])
 
 
 main()
