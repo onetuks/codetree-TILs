@@ -18,8 +18,12 @@ def add(m_id, p_id, color, max_depth):
     if p_id == -1:
         nodes[m_id] = curr_node
         return
-    if nodes[p_id].max_depth <= 1:
-        return
+    parent_id = p_id
+    depth = 1
+    while parent_id != -1:
+        if nodes[parent_id].max_depth < depth:
+            return
+        parent_id = nodes[parent_id].p_id
     nodes[p_id].children.append(curr_node)
     nodes[m_id] = curr_node
     
