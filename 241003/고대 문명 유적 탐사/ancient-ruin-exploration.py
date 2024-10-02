@@ -24,7 +24,7 @@ def cal_cnt(board):
 
     for i in range(5):
         for j in range(5):
-            if not visited[i][j]:
+            if not visited[i][j] and board[i][j] != 0:
                 visited[i][j] = True
                 dq = deque([(i, j)])
                 trace = deque([(i, j)])
