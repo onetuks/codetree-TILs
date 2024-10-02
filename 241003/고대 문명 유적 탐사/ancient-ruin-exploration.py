@@ -59,7 +59,7 @@ mlist = deque(map(int, input().split()))
 for _ in range(k):
     max_cnt = 0
     max_matrix = list()
-    for r in range(3):
+    for r in range(1, 4):
         for i in range(3):
             for j in range(3):
                 rotated = rotate(i, j, r, matrix)
