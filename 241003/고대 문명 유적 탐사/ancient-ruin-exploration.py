@@ -3,19 +3,34 @@ from copy import deepcopy
 
 dlist = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 
-def rotate(i, j, r, matrix):
+# def rotate(i, j, r, matrix):
+#     result = deepcopy(matrix)
+#     sub = [[result[i + x][j + y] for y in range(3)] for x in range(3)]
+#     for _ in range(r):
+#         sub = rotate_sub(sub)
+#     for x in range(3):
+#         for y in range(3):
+#             result[i + x][j + y] = sub[x][y]
+#     return result
+
+
+# def rotate_sub(sub):
+#     return list(zip(*sub[::-1]))
+
+def rotate(sy, sx, cnt):
     result = deepcopy(matrix)
-    sub = [[result[i + x][j + y] for y in range(3)] for x in range(3)]
-    for _ in range(r):
-        sub = rotate_sub(sub)
-    for x in range(3):
-        for y in range(3):
-            result[i + x][j + y] = sub[x][y]
+    for _ in range(cnt):
+        tmp = result[sy + 0][sx + 2]
+        result[sy + 0][sx + 2] = result[sy + 0][sx + 0]
+        result[sy + 0][sx + 0] = result[sy + 2][sx + 0]
+        result[sy + 2][sx + 0] = result[sy + 2][sx + 2]
+        result[sy + 2][sx + 2] = tmp
+        tmp = result[sy + 1][sx + 2]
+        result[sy + 1][sx + 2] = result[sy + 0][sx + 1]
+        result[sy + 0][sx + 1] = result[sy + 1][sx + 0]
+        result[sy + 1][sx + 0] = result[sy + 2][sx + 1]
+        result[sy + 2][sx + 1] = tmp
     return result
-
-
-def rotate_sub(sub):
-    return list(zip(*sub[::-1]))
 
 
 def cal_cnt(board):
@@ -24,7 +39,7 @@ def cal_cnt(board):
 
     for i in range(5):
         for j in range(5):
-            if not visited[i][j] and board[i][j] != 0:
+            if not visited[i][j]:
                 visited[i][j] = True
                 dq = deque([(i, j)])
                 trace = deque([(i, j)])
@@ -62,7 +77,7 @@ for _ in range(k):
     for r in range(4):
         for i in range(3):
             for j in range(3):
-                rotated = rotate(i, j, r, matrix)
+                rotated = rotate(i, j, r)
                 cnt = cal_cnt(rotated)
                 if cnt > max_cnt:
                     max_cnt = cnt
