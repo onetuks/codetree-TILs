@@ -1,52 +1,38 @@
 dlist = [(0, 1), (0, -1), (1, 0), (-1, 0)]
 n, visited, matrix = 0, [], []
 
-def for_normal(i, j):
+def dfs(i, j):
     for dx, dy in dlist:
         di, dj = i + dx, j + dy
         if 0 <= di < n and 0 <= dj < n and not visited[di][dj] and matrix[di][dj] == matrix[i][j]:
             visited[di][dj] = True
-            for_normal(di, dj)
+            dfs(di, dj)
 
+n = int(input())
 
-def for_blind(i, j):
-    for dx, dy in dlist:
-        di, dj = i + dx, j + dy
-        if 0 <= di < n and 0 <= dj < n and not visited[di][dj]:
-            if matrix[i][j] == 'B' and matrix[i][j] != matrix[di][dj]:
-                continue
-            elif matrix[i][j] != 'B' and matrix[di][dj] == 'B':
-                continue
-            visited[di][dj] = True
-            for_blind(di, dj)
+matrix = [input() for _ in range(n)]
 
-def main():
-    global n, matrix, visited
+visited = [[False for _ in range(n)] for _ in range(n)]
+cnt = 0
+for i in range(n):
+    for j in range(n):
+        if not visited[i][j]:
+            visited[i][j] = True
+            cnt += 1
+            dfs(i, j)
 
-    n = int(input())
+print(cnt, end=" ")
 
-    matrix = [input() for _ in range(n)]
+for i in range(n):
+    matrix[i] = matrix[i].replace('R', 'O').replace('G', 'O')
 
-    visited = [[False for _ in range(n)] for _ in range(n)]
-    cnt = 0
-    for i in range(n):
-        for j in range(n):
-            if not visited[i][j]:
-                visited[i][j] = True
-                cnt += 1
-                for_normal(i, j)
+visited = [[False for _ in range(n)] for _ in range(n)]
+cnt = 0
+for i in range(n):
+    for j in range(n):
+        if not visited[i][j]:
+            visited[i][j] = True
+            cnt += 1
+            dfs(i, j)
 
-    print(cnt, end=" ")
-
-    visited = [[False for _ in range(n)] for _ in range(n)]
-    cnt = 0
-    for i in range(n):
-        for j in range(n):
-            if not visited[i][j]:
-                visited[i][j] = True
-                cnt += 1
-                for_blind(i, j)
-
-    print(cnt, end=" ")
-
-main()
+print(cnt, end=" ")
