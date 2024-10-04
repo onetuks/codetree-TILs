@@ -13,16 +13,19 @@ def is_prime(num):
 
 n = int(input())
 
-for i in range(1, int(1e6) + 1):
-    a, b = n - i, n + i
-    
-    a_prime = is_prime(a)
-    b_prime = is_prime(b)
+if is_prime(n):
+    print(n)
+else:
+    for i in range(1, int(1e6) + 1):
+        a, b = n - i, n + i
+        
+        a_prime = is_prime(a)
+        b_prime = is_prime(b)
 
-    if a_prime:
-        print(a, end=" ")
-    if b_prime:
-        print(b)
-    
-    if a_prime or b_prime:
-        break
+        if a_prime:
+            print(a, end=" ")
+        if b_prime:
+            print(b)
+        
+        if a_prime or b_prime:
+            break
