@@ -15,7 +15,6 @@ for i in range(n):
         dic[a] -= 1
         dic[b] -= 1
         answer += dic[k - a - b]
-        print(answer, a, b, k - a - b, dic[k - a - b])
         dic[a] += 1
         dic[b] += 1
 
