@@ -1,16 +1,17 @@
-from collections import Counter
+from collections import defaultdict
 
 n, k = map(int, input().split())
-alist = list(map(int, input().split()))
-counter = Counter(alist)
+arr = list(map(int, input().split()))
+cnt = defaultdict(int)
 
-answer = 0
+for a in arr:
+    cnt[a] += 1
 
-for k1, v in counter.items():
-    k2 = k - k1
-    if k1 == k2:
-        answer += v * (v - 1)
-    else:
-        answer += v * counter[k2]
+ans = 0
 
-print(answer // 2)
+for a in arr:
+    cnt[a] -= 1
+    b = k - a
+    ans += cnt[b]
+
+print(ans)
