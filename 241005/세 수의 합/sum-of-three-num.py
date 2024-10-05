@@ -1,21 +1,18 @@
 from collections import defaultdict
 
 n, k = map(int, input().split())
-alist = list(map(int, input().split()))
-dic = defaultdict(int)
+arr = list(map(int, input().split()))
+cnt = defaultdict(int)
 
-for a in alist:
-    dic[a] += 1
+for ar in arr:
+    cnt[ar] += 1
 
-answer = 0
+ans = 0
+
 for i in range(n):
-    for j in range(i + 1, n):
-        a = alist[i]
-        b = alist[j]
-        dic[a] -= 1
-        dic[b] -= 1
-        answer += dic[k - a - b]
-        dic[a] += 1
-        dic[b] += 1
+    cnt[arr[i]] -= 1
+    for j in range(i):
+        diff = k - arr[i] - arr[j]
+        ans += cnt[diff]
 
-print(answer // 3)
+print(ans)
