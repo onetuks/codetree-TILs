@@ -2,19 +2,15 @@ from collections import Counter
 
 n, k = map(int, input().split())
 alist = list(map(int, input().split()))
-
 counter = Counter(alist)
-keys = sorted(list(counter.keys()))
 
 answer = 0
 
-for i in range(len(keys) - 1):
-    for j in range(i + 1, len(keys)):
-        if keys[i] + keys[j] > k:
-            break
-        if keys[i] + keys[j] == k:
-            answer += counter[keys[i]] * counter[keys[j]]
+for k1, v in counter.items():
+    k2 = k - k1
+    if k1 == k2:
+        answer += v * (v - 1)
+    else:
+        answer += v * counter[k2]
 
-answer += counter[k // 2] * (counter[k // 2] - 1) // 2 if counter[k // 2] > 1 else 0
-
-print(answer)
+print(answer // 2)
