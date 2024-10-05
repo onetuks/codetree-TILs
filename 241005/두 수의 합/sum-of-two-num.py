@@ -13,6 +13,6 @@ for i in range(len(keys) - 1):
         if keys[i] + keys[j] == k:
             answer += counter[keys[i]] * counter[keys[j]]
 
-answer += counter[k // 2] * (counter[k // 2] - 1) / 2 if counter[k // 2] > 1 else 0
+answer += counter[k // 2] * (counter[k // 2] - 1) // 2 if counter[k // 2] > 1 else 0
 
 print(answer)
