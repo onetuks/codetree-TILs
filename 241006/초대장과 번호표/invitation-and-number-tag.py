@@ -5,11 +5,12 @@ groups.sort(key=lambda x: x)
 
 invited = set([1])
 
-for group in groups:
-    members = set(group[1:])
-    rest = members - invited
+for _ in range(2):
+    for group in groups:
+        members = set(group[1:])
+        rest = members - invited
 
-    if len(rest) <= 1:
-        invited |= members
+        if len(rest) <= 1:
+            invited |= members
 
 print(len(invited))
