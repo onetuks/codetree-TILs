@@ -1,22 +1,31 @@
-from collections import deque
+from collections import deque, defaultdict
 
 n, g = map(int, input().split())
-groups = deque([0] + list(map(int, input().split())) for _ in range(g))
+member_groups = defaultdict(list)
+groups = dict()
+
+for i in range(g):
+    line = list(map(int, input().split()))
+
+    for member in line[1:]:
+        member_groups[member].append(i)
+
+    groups[i] = line[1:]
 
 invited = set([1])
+q = deque([1])
 
-while groups:
-    group = groups.popleft()
-    members = set(group[2:])
-    rest = members - invited
+while q:
+    member = q.popleft()
 
-    if len(rest) <= 1:
-        invited |= members
-        continue
-    if group[0] > 1000:
-        continue
-    group = [group[0] + 1] + group[1:]
-    groups.append(group)
+    gids = member_groups[member]
 
+    for gid in gids:
+        group = groups[gid]
+        rest = set(group) - invited
+        if len(rest) == 1:
+            rest_member = rest.pop()
+            invited.add(rest_member)
+            q.append(rest_member)
 
 print(len(invited))
