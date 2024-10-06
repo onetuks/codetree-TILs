@@ -13,7 +13,7 @@ while groups:
     if len(rest) <= 1:
         invited |= members
         continue
-    if group[0] > 25:
+    if group[0] > 100:
         continue
     group = [group[0] + 1] + group[1:]
     groups.append(group)
