@@ -22,6 +22,9 @@ while q:
 
     for gid in gids:
         group = groups[gid]
+        diff = len(group) - len(invited)
+        if diff > 1:
+            continue
         rest = set(group) - invited
         if len(rest) == 1:
             rest_member = rest.pop()
