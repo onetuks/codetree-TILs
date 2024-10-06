@@ -1,14 +1,15 @@
 n, g = map(int, input().split())
+groups = [list(map(int, input().split())) for _ in range(g)]
+
+groups.sort(key=lambda x: x)
 
 invited = set([1])
 
-for _ in range(g):
-    line = list(map(int, input().split()))
+for group in groups:
+    members = set(group[1:])
+    rest = members - invited
 
-    group = set(line[1:])
-    rest = group - invited
-    
     if len(rest) <= 1:
-        invited |= group
+        invited |= members
 
 print(len(invited))
