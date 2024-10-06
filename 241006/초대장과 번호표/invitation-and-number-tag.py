@@ -23,7 +23,7 @@ while q:
     for gid in gids:
         group = groups[gid]
         diff = len(group) - len(invited)
-        if diff > 1:
+        if diff > 1 or diff < 0:
             continue
         rest = set(group) - invited
         if len(rest) == 1:
