@@ -8,7 +8,7 @@ ans = 1e10
 for a in arr:
     idx = arr.bisect_right(a + m)
 
-    if idx >= len(arr) or idx <= 0:
+    if idx == 0 or idx == len(arr):
         continue
 
     ans = min(ans, arr[idx] - a)
