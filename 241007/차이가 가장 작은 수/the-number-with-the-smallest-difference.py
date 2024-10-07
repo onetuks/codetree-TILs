@@ -8,10 +8,9 @@ ans = 1e10
 for a in arr:
     idx = arr.bisect_right(a + m)
 
-    if idx >= len(arr):
+    if idx >= len(arr) or idx <= 0:
         continue
 
-    if arr[idx] - a >= m:
-        ans = min(ans, arr[idx] - a)
+    ans = min(ans, arr[idx] - a)
 
 print(ans if ans < 1e10 else -1)
