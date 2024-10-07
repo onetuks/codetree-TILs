@@ -6,7 +6,7 @@ arr = SortedSet(int(input()) for _ in range(n))
 ans = 1e10
 
 for a in arr:
-    idx = arr.bisect_right(a + m - 1)
+    idx = arr.bisect_right(a + m)
 
     if idx >= len(arr):
         continue
