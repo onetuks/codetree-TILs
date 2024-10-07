@@ -1,18 +1,14 @@
 from sortedcontainers import SortedSet
 
 n, m = map(int, input().split())
-arr = list(map(int, input().split()))
-
 seats = SortedSet(range(1, m + 1))
 
 ans = 0
 
-for a in arr:
-    idx = seats.bisect_right(a)
+for num in list(map(int, input().split())):
+    idx = seats.bisect_right(num)
 
-    if idx == 0:
-        break
-    else:
+    if 0 <= idx - 1 < m:
         ans += 1
         seats.remove(seats[idx - 1])
 
