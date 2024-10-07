@@ -14,4 +14,4 @@ for a in arr:
     if arr[idx] - a >= m:
         ans = min(ans, arr[idx] - a)
 
-print(ans)
+print(ans if ans < 1e10 else -1)
