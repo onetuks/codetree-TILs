@@ -8,7 +8,7 @@ ans = 1e10
 for a in arr:
     idx = arr.bisect_right(a + m - 1)
 
-    if idx >= n:
+    if idx >= n or idx < 0:
         continue
 
     if arr[idx] - a >= m:
