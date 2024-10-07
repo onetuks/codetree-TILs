@@ -1,7 +1,10 @@
 from sortedcontainers import SortedSet
 
 n, m = map(int, input().split())
-locs = SortedSet(tuple(map(int, input().split())) for _ in range(n))
+# locs = SortedSet(tuple(map(int, input().split())) for _ in range(n))
+locs = SortedSet()
+for _ in range(n):
+    locs.add(tuple(map(int, input().split())))
 
 for _ in range(m):
     k = int(input())
