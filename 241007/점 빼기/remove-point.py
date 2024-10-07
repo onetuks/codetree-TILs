@@ -8,10 +8,10 @@ for _ in range(m):
 
     idx = locs.bisect_left((k, 1))
 
-    if idx < 0 or idx >= len(locs):
+    if idx >= len(locs):
         print(-1, -1)
         continue
 
-    result = locs[idx]
-    locs.remove(result)
-    print(' '.join(map(str, result)))
+    x, y = locs[idx]
+    locs.remove(locs[idx])
+    print(x, y)
