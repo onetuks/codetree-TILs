@@ -1,14 +1,15 @@
 from sortedcontainers import SortedSet
 
 n = int(input())
-arr = list(map(int, input().split()))
 s = SortedSet([0])
+diffs = SortedSet()
 
-for a in arr:
-    s.add(a)
-    min_dist = 1e10
-    for i in range(1, len(s)):
-        idx = s.bisect_left(s[i])
-        min_dist = min(min_dist, s[idx] - s[idx - 1])
+for num in list(map(int, input().split())):
+    s.add(num)
+    idx = s.bisect_left(num)
+    if 0 <= idx + 1 < len(s):
+        diffs.add(s[idx + 1] - s[idx])
+    if 0 <= idx - 1 < len(s):
+        diffs.add(s[idx] - s[idx - 1])
 
-    print(min_dist)
+    print(diffs[0])
