@@ -8,8 +8,10 @@ ans = 0
 for num in list(map(int, input().split())):
     idx = seats.bisect_right(num)
 
-    if 0 <= idx - 1 < m:
-        ans += 1
-        seats.remove(seats[idx - 1])
+    if idx == 0:
+        break
+    
+    ans += 1
+    seats.remove(seats[idx - 1])
 
 print(ans)
