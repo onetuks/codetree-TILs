@@ -18,4 +18,4 @@ for _ in range(n):
         else:
             print(0)
     elif line[0] == 'top':
-        print(pq[0])
+        print(-pq[0])
