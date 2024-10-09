@@ -35,7 +35,7 @@ while events:
     people.remove((cx, cv))
     events.remove((ct, cx, cv))
 
-    idx = people.bisect_right((cx, cv))
+    idx = people.bisect_left((cx, cv))
     nx, nv = people[idx]
 
     if idx > 0:
