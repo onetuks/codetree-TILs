@@ -3,23 +3,18 @@ from heapq import heappush, heappop
 n = int(input())
 arr = list(map(int, input().split()))
 
-ans = 0
+min_num = arr[-1]
+acc_sum = 0
+min_arr = [a for a in arr]
+acc_arr = [a for a in arr]
+for i in reversed(range(n - 1)):
+    min_arr[i] = min(min_arr[i], min_arr[i + 1])
+    acc_arr[i] += acc_arr[i + 1]
 
-for k in range(1, n - 1):
-    rest = arr[k:]
-    q = list()
+q = list()
 
-    for r in rest:
-        heappush(q, r)
+for i in range(1, n - 1):
+    avg = (acc_arr[i] - min_arr[i]) / (n - i - 1)
+    heappush(q, -avg)
 
-    heappop(q)
-
-    s = 0
-    cnt = 0
-    while q:
-        s += heappop(q)
-        cnt += 1
-    
-    ans = max(ans, round(s / cnt, 2))
-
-print("%.2f" %ans)
+print("%.2f" %-heappop(q))
