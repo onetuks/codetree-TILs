@@ -32,6 +32,9 @@ def pop(node):
         node.prev.post = node.post
     if node.post is not None:
         node.post.prev = node.prev
+    
+    node.prev = None
+    node.post = None
 
 
 n = int(input())
