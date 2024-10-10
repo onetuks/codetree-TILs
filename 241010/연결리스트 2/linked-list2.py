@@ -47,9 +47,9 @@ for _ in range(q):
     if line[0] == 1:
         pop(nodes[line[1]])
     elif line[0] == 2:
-        insert_prev(nodes[line[-1]], nodes[line[1]])
+        insert_prev(nodes[line[1]], nodes[line[-1]])
     elif line[0] == 3:
-        insert_post(nodes[line[-1]], nodes[line[1]])
+        insert_post(nodes[line[1]], nodes[line[-1]])
     elif line[0] == 4:
         nodes[line[1]].print()
 
