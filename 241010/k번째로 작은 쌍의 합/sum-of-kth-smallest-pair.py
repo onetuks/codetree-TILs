@@ -15,8 +15,9 @@ for i, a in enumerate(alist):
 for _ in range(k - 1):
     s, ai, bi = heappop(q)
 
-    if bi + 1 < m:
-        heappush(q, (alist[ai] + blist[bi + 1], ai, bi))
+    bi += 1
+    if bi < m:
+        heappush(q, (alist[ai] + blist[bi], ai, bi))
 
 result = heappop(q)
 
