@@ -8,4 +8,7 @@ for i in range(m // 5 + 1):
     if rest >= 0 and rest % 2 == 0:
         ans = min(ans, i + rest // 2)
 
-print(ans)
+if ans >= 1e11:
+    print(-1)
+else:
+    print(ans)
