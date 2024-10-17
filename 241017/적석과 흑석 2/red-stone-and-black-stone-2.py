@@ -8,7 +8,7 @@ blacks.sort()
 ans = 0
 idx = 0
 for a, b in blacks:
-    while reds[idx] < a:
+    while idx < c and reds[idx] < a:
         idx += 1
     
     if a <= reds[idx] <= b:
