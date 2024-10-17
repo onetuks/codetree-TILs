@@ -3,7 +3,7 @@ reds = [int(input()) for _ in range(c)]
 blacks = [tuple(map(int, input().split())) for _ in range(n)]
 
 reds.sort()
-blacks.sort()
+blacks.sort(key=lambda x: (x[1], x[0]))
 
 ans = 0
 idx = 0
