@@ -1,27 +1,17 @@
 n = int(input())
-cnt = dict()
+arr = []
 for _ in range(n):
     x, y = map(int, input().split())
-    cnt[y] = x
+    for _ in range(x):
+        arr.append(y)
+arr.sort()
 
-keys = sorted(list(cnt.keys()))
-i, j = 0, n - 1
+m = len(arr)
 
 ans = 1e11
 
-while cnt:
-    a, b = keys[i], keys[j]
-    
-    ans = min(ans, a + b)
-
-    cnt[a] -= 1
-    cnt[b] -= 1
-
-    if a in cnt and cnt[a] == 0:
-        i += 1
-        cnt.pop(a)
-    if b in cnt and cnt[b] == 0:
-        j -= 1
-        cnt.pop(b)
+for i in range(m // 2):
+    val = arr[i] + arr[m - 1 - i]
+    ans = min(ans, val)
 
 print(ans)
