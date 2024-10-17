@@ -10,6 +10,6 @@ for a, b in blacks:
     idx = reds.bisect_left(a)
     if idx < c and reds[idx] <= b:
         ans += 1
-        reds.pop(idx)
+        reds.remove(reds[idx])
 
 print(ans)
