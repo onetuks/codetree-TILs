@@ -1,17 +1,23 @@
 n = int(input())
-arr = []
+cdic = dict()
 for _ in range(n):
     x, y = map(int, input().split())
-    for _ in range(x):
-        arr.append(y)
-arr.sort()
+    cdic[y] = x
 
-m = len(arr)
+ckeys = sorted(list(cdic.keys()))
 
+i, j = 0, n - 1
 ans = 1e11
 
-for i in range(m // 2):
-    val = arr[i] + arr[m - 1 - i]
-    ans = min(ans, val)
+while i <= j or cdic[ckeys[i]] > 0 or cdic[ckeys[j]] > 0:
+    ans = min(ans, ckeys[i] + ckeys[j])
+
+    cdic[ckeys[i]] -= 1
+    cdic[ckeys[j]] -= 1
+
+    if cdic[ckeys[i]] == 0:
+        i += 1
+    if cdic[ckeys[j]] == 0:
+        j -= 1
 
 print(ans)
