@@ -12,8 +12,8 @@ ans = 1e11
 while i <= j or cdic[ckeys[i]] > 0 or cdic[ckeys[j]] > 0:
     ans = min(ans, ckeys[i] + ckeys[j])
 
-    cdic[ckeys[i]] -= 1
-    cdic[ckeys[j]] -= 1
+    cdic[ckeys[i]] -= min(cdic[ckeys[i]], cdic[ckeys[j]])
+    cdic[ckeys[j]] -= min(cdic[ckeys[i]], cdic[ckeys[j]])
 
     if cdic[ckeys[i]] == 0:
         i += 1
