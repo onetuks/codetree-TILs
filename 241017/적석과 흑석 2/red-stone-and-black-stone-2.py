@@ -9,7 +9,7 @@ blacks.sort(key=lambda x: (x[1]))
 ans = 0
 for a, b in blacks:
     idx = reds.bisect_left(a)
-    if reds[idx] <= b:
+    if idx < c and reds[idx] <= b:
         reds.pop(idx)
         ans += 1
 
