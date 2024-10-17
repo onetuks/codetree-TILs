@@ -13,10 +13,10 @@ while i <= j:
 
     if ci < cj:
         nums[j] = (cj - ci, nj)
-        j -= 1
+        i += 1
     elif ci > cj:
         nums[i] = (ci - cj, ni)
-        i += 1
+        j -= 1
     else:
         i += 1
         j -= 1
