@@ -40,4 +40,7 @@ for i in range(1, n + 1):
         continue
     ans = min(ans, adp[i] + adp[bred] + bdp[i])
 
-print(ans)
+if ans >= 1e11:
+    print(-1)
+else:
+    print(ans)
