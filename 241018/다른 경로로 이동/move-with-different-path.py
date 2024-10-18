@@ -18,7 +18,7 @@ def dijkstra():
                 dp[next_node] = next_cost
                 heappush(q, (dp[next_node], next_node))
                 path[next_node] = node
-            elif dp[next_node] == next_cost and path[next_node] > node:
+            elif dp[next_node] == next_cost and path[next_node] > path[node]:
                 path[next_node] = node
 
     return dp[n]
