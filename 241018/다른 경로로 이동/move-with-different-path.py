@@ -1,7 +1,8 @@
 from heapq import heappush, heappop
 
 def dijkstra():
-    dp = [1e15 for _ in range(n + 1)]
+    for i in range(n + 1):
+        dp[i] = 1e15
     dp[1] = 0
 
     q = [(dp[1], 1)]
@@ -13,38 +14,41 @@ def dijkstra():
             continue
 
         for next_node in range(1, n + 1):
-            next_cost = dp[node] + adj[node][next_node]
-            if dp[next_node] > next_cost:
-                dp[next_node] = next_cost
+            if adj[node][next_node] == 0:
+                continue
+            if dp[next_node] > dp[node] + adj[node][next_node]:
+                dp[next_node] = dp[node] + adj[node][next_node]
                 heappush(q, (dp[next_node], next_node))
-                path[next_node] = node
-            elif dp[next_node] == next_cost and path[next_node] < path[node]:
-                path[next_node] = node
-
-    return dp[n]
 
 n, m = map(int, input().split())
-adj = [[1e15 for _ in range(n + 1)] for _ in range(n + 1)]
+adj = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
 for _ in range(m):
     u, v, w = map(int, input().split())
     adj[u][v] = w
     adj[v][u] = w
 
-path = [-1 for _ in range(n + 1)]
+dp = [1e15 for _ in range(n + 1)]
 dijkstra()
 
 x = n
 vertices = [x]
 while x != 1:
-    x = path[x]
+    for i in range(1, n + 1):
+        if adj[x][i] == 0:
+            continue
+        if dp[i] + adj[i][x] == dp[x]:
+            x = i
+            break
     vertices.append(x)
 
 for i in range(1, len(vertices)):
     curr, prev = vertices[i], vertices[i - 1]
-    adj[curr][prev] = 1e15
-    adj[prev][curr] = 1e15
+    adj[curr][prev] = 0
+    adj[prev][curr] = 0
 
-ans = dijkstra()
+dijkstra()
+
+ans = dp[n]
 
 if ans < 1e15:
     print(ans)
