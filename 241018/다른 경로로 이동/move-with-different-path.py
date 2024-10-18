@@ -13,9 +13,12 @@ def dijkstra():
             continue
 
         for next_node in range(1, n + 1):
-            if dp[next_node] >= dp[node] + adj[node][next_node]:
-                dp[next_node] = dp[node] + adj[node][next_node]
+            next_cost = dp[node] + adj[node][next_node]
+            if dp[next_node] > next_cost:
+                dp[next_node] = next_cost
                 heappush(q, (dp[next_node], next_node))
+                path[next_node] = node
+            elif dp[next_node] == next_cost and path[next_node] > node:
                 path[next_node] = node
 
     return dp[n]
