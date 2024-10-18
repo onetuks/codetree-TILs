@@ -13,4 +13,7 @@ for i in range(n):
         ans += 1
         cnt = 0
 
+if cnt > 0:
+    ans += 1
+
 print(ans)
