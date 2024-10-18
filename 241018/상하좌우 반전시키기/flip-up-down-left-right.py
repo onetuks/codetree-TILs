@@ -1,4 +1,5 @@
 dlist = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+slist = [(0, -1), (-1, 0)]
 
 def convert(i, j):
     matrix[i][j] ^= 1
@@ -16,19 +17,14 @@ for i in range(n):
     for j in range(n):
         if i == 0 and j == 0:
             continue
-        zcnt = 0
-        for dx, dy in dlist:
-            di, dj = i + dx, j + dy
-            if 0 <= di < n and 0 <= dj < n and matrix[di][dj] == 0:
+        zcnt = matrix[i][j] ^ 1
+        for sx, sy in slist:
+            si, sj = i + sx, j + sy
+            if 0 <= si < n and 0 <= sj < n and matrix[si][sj] == 0:
                 zcnt += 1
-        if zcnt >= 2 and matrix[i][j] == 0:
-            convert(i, j)
+        if zcnt >= 2:
             ans += 1
-
-            # print(i, j)
-            # for mat in matrix:
-            #     print(mat)
-            # print()
+            convert(i, j)
 
 for mat in matrix:
     if 0 in mat:
