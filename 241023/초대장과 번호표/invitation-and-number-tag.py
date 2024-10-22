@@ -23,6 +23,7 @@ while q:
         rest = groups[gid] - invited
         if len(rest) == 1:
             new_mid = list(rest)[0]
+            groups[gid].remove(new_mid)
             if new_mid not in invited:
                 invited.add(new_mid)
                 q.append(new_mid)
