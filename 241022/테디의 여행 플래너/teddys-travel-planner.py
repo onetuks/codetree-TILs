@@ -5,9 +5,15 @@ class Node:
         self.post = None
 
     def __str__(self):
-        prev_name = self.prev.name if self.prev else -1
-        post_name = self.post.name if self.post else -1
-        return "%s %s" %(prev_name, post_name)
+        return self.name
+
+    def print(self):
+        if not self.prev or not self.post:
+            print(-1)
+        elif self.prev == self.post:
+            print(-1)
+        else:
+            print(self.prev, self.post)
 
 def connect(s, e):
     if not s: s.post = e
@@ -47,4 +53,4 @@ for _ in range(q):
     elif cmds[0] == '4':
         add(curr, Node(cmds[1]))
 
-    print(curr)
+    curr.print()
