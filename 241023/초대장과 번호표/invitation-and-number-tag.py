@@ -20,10 +20,9 @@ while q:
     mid = q.popleft()
     
     for gid in mem_gids[mid]:
-        rest = groups[gid] - invited
-        if len(rest) == 1:
-            new_mid = list(rest)[0]
-            groups[gid].remove(new_mid)
+        groups[gid].remove(mid)
+        if len(groups[gid]) == 1:
+            new_mid = list(groups[gid])[0]
             if new_mid not in invited:
                 invited.add(new_mid)
                 q.append(new_mid)
