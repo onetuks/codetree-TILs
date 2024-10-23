@@ -1,4 +1,7 @@
 from heapq import heappush, heappop
+from sys import stdin
+
+input = stdin.readline
 
 n = int(input())
 customers = []
