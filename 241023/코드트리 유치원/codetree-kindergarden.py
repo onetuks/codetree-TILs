@@ -22,7 +22,7 @@ def make_sub_list(b):
         nodes[idx] = Node(idx)
         if i > 0:
             connect(nodes[idx - 1], nodes[idx])
-    return (idx - b + 1, idx)
+    return (nodes[idx - b + 1], nodes[idx])
 
 def connect(s, e):
     if s: s.post = e
@@ -50,7 +50,7 @@ for _ in range(q):
 
     if cmd[0] == 1:
         s, e = make_sub_list(cmd[2])
-        insert_back(nodes[cmd[1]], nodes[s], nodes[e])
+        insert_back(nodes[cmd[1]], s, e)
     elif cmd[0] == 2:
         a, b = cmd[1], cmd[2]
         for i in range(b):
