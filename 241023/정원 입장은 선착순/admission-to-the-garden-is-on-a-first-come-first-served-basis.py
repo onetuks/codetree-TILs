@@ -1,32 +1,27 @@
 from heapq import heappush, heappop
 
 n = int(input())
-people = []
+customers = []
 
 for i in range(n):
     a, t = map(int, input().split())
-    people.append((i, t, a))
-
-people.sort(key=lambda x: (x[-1]))
+    heappush(customers, (a, i, t))
 
 ans = 0
-
 q = []
-idx = 0
-time = people[0][-1]
+time = 0
 
-while time < 1e10:
-    while idx < n and people[idx][-1] <= time:
-        heappush(q, people[idx])
-        idx += 1
-    
-    if q:
-        i, t, a = heappop(q)
-        ans = max(ans, time - a)
-        time += t
-    else:
-        if not q and idx == n:
-            break
-        time += 1
+while customers or q:
+    while customers and customers[0][0] <= time:
+        a, i, t = heappop(customers)
+        heappush(q, (i, a, t))
+
+    if not q:
+        time = customers[0][0]
+        continue
+
+    i, a, t = heappop(q)
+    ans = max(ans, time - a)
+    time += t
 
 print(ans)
