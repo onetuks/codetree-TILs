@@ -14,6 +14,16 @@ class Node:
             print(-1)
 
 
+def make_sub_list(b):
+    global idx
+    a, b = cmd[1], cmd[2]
+    for i in range(b):
+        idx += 1
+        nodes[idx] = Node(idx)
+        if i > 0:
+            connect(nodes[idx - 1], nodes[idx])
+    return (idx - b + 1, idx)
+
 def connect(s, e):
     if s: s.post = e
     if e: e.prev = s
@@ -32,20 +42,15 @@ def insert_front(a, s, e):
 q = int(input())
 
 idx = 1
-nodes = [None for _ in range(100001)]
+nodes = dict()
 nodes[idx] = Node(idx)
 
 for _ in range(q):
     cmd = list(map(int, input().split()))
 
     if cmd[0] == 1:
-        a, b = cmd[1], cmd[2]
-        for i in range(b):
-            idx += 1
-            nodes[idx] = Node(idx)
-            if i > 0:
-                connect(nodes[idx - 1], nodes[idx])
-        insert_back(nodes[cmd[1]], nodes[idx - b + 1], nodes[idx])
+        s, e = make_sub_list(cmd[2])
+        insert_back(nodes[cmd[1]], nodes[s], nodes[e])
     elif cmd[0] == 2:
         a, b = cmd[1], cmd[2]
         for i in range(b):
