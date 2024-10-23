@@ -11,12 +11,16 @@ public class Main {
         List<Integer> aCards = new ArrayList<>();
         List<Integer> bCards = new ArrayList<>();
 
+        Set<Integer> bSet = new HashSet<>();
+
         for (int i = 0; i < n; i ++) {
-            bCards.add(sc.nextInt());
+            int b = sc.nextInt();
+            bCards.add(b);
+            bSet.add(b);
         }
 
         for (int i = 1; i <= 2 * n; i ++) {
-            if (!bCards.contains(i)) {
+            if (!bSet.contains(i)) {
                 aCards.add(i);
             }
         }
