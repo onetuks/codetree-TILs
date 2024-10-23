@@ -23,7 +23,7 @@ public class Main {
                 pq.add(y);
                 pq.add(z);
 
-                System.out.println(x * y * z);
+                System.out.println((long) x * y * z);
             } else {
                 System.out.println(-1);
             }
