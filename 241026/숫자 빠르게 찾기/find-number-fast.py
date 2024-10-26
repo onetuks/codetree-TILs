@@ -2,7 +2,7 @@ n, m = map(int, input().split())
 arr = list(map(int, input().split()))
 
 def binsearch(x):
-    l, r = 0, n
+    l, r = 0, n - 1
     while l <= r:
         m = (l + r) // 2
         if arr[m] == x:
