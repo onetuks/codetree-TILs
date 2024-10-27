@@ -30,6 +30,8 @@ for _ in range(m):
     s, e = min(s, e), max(s, e)
     s_min_idx = upper_bound(s)
     e_min_idx = upper_bound(e)
-    if s_min_idx == 0 and dots[s_min_idx] < s:
-        s_min_idx -= 1
-    print(e_min_idx - s_min_idx)
+    ans = e_min_idx - s_min_idx
+    # print(s_min_idx, e_min_idx)
+    if 0 <= s_min_idx < n and 0 <= e_min_idx < n and dots[s_min_idx] == s and dots[e_min_idx] == e:
+        ans += 1
+    print(ans)
