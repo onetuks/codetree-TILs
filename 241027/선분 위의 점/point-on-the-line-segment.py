@@ -18,4 +18,7 @@ for _ in range(m):
     s, e = min(s, e), max(s, e)
     s_min_idx = upper_bound(s)
     e_min_idx = upper_bound(e)
-    print(e_min_idx - s_min_idx)
+    ans = e_min_idx - s_min_idx
+    if dots[s_min_idx] == s and dots[e_min_idx] == e:
+        ans += 1
+    print(ans)
