@@ -25,6 +25,8 @@ def lower_bound(x):
             l = m + 1
     return min_idx
 
+arr.sort()
+
 for _ in range(m):
     s, e = map(int, input().split())
     ans = upper_bound(e) - lower_bound(s)
