@@ -27,5 +27,4 @@ def upper_bound(x):
 
 for _ in range(m):
     s, e = map(int, input().split())
-    s, e = min(s, e), max(s, e)
     print(upper_bound(e) - lower_bound(s))
