@@ -5,14 +5,15 @@ public class Main {
 
     private static int n;
     private static int t;
-    private static int durs = 0;
+    private static int[] durs;
 
     public static void main(String[] args) {
         n = sc.nextInt();
         t = sc.nextInt();
 
+        durs = new int[n];
         for (int i = 0; i < n; i ++) {
-            durs += sc.nextInt();
+            durs[i] = sc.nextInt();
         }
 
         int l = 1, r = n;
@@ -31,6 +32,18 @@ public class Main {
     }
 
     private static boolean isPossible(int k) {
-        return durs / (float) k <= t;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (int d: durs) {
+            if (pq.size() < k) {
+                pq.add(d);
+            } else {
+                pq.add(pq.poll() + d);
+            }
+        }
+        int endTime = 0;
+        while (!pq.isEmpty()) {
+            endTime = pq.poll();
+        }
+        return endTime <= t;
     }
 }
