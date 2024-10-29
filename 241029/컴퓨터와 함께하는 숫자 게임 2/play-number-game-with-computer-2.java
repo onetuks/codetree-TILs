@@ -16,7 +16,7 @@ public class Main {
         a = sc.nextLong();
         b = sc.nextLong();
 
-        for (int target = a; target <= b; target ++) {
+        for (long target = a; target <= b; target ++) {
             long count = bisearch(target);
             if (count < minCount) {
                 minCount = count;
