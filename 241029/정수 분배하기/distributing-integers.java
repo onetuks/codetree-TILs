@@ -13,14 +13,14 @@ public class Main {
         n = sc.nextInt();
         m = sc.nextInt();
 
-        int minNum = Integer.MAX_VALUE;
+        int maxNum = Integer.MIN_VALUE;
         nums = new int[n];
         for (int i = 0; i < n; i ++) {
             nums[i] = sc.nextInt();
-            minNum = Math.min(minNum, nums[i]);
+            maxNum = Math.max(maxNum, nums[i]);
         }
 
-        int l = 1, r = minNum;
+        int l = 1, r = maxNum;
         int ans = 0;
         while (l <= r) {
             int mid = (l + r) / 2;
