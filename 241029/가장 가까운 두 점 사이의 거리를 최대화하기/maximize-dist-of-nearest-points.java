@@ -14,7 +14,7 @@ public class Main {
             lines[i] = new int[]{sc.nextInt(), sc.nextInt()};
         }
 
-        Arrays.sort(lines, (a, b) -> Integer.compare(a[1], b[1]));
+        Arrays.sort(lines, (a, b) -> Integer.compare(a[0], b[0]));
 
         int l = 0, r = (int) 1e9;
         int ans = 0;
