@@ -11,7 +11,8 @@ public class Main {
 
         lines = new int[n][2];
         for (int i = 0; i < n; i ++) {
-            lines[i] = new int[]{sc.nextInt(), sc.nextInt()};
+            lines[i][0] = sc.nextInt();
+            lines[i][1] = sc.nextInt();
         }
 
         Arrays.sort(lines, (a, b) -> Integer.compare(a[0], b[0]));
@@ -32,14 +33,14 @@ public class Main {
     }
 
     private static boolean isPossible(int dist) {
-        int pos = lines[0][0];
-        for (int i = 1; i < n; i++) {
+        int curr = lines[0][0];
+        for (int i = 1; i < n; i ++) {
             int s = lines[i][0];
             int e = lines[i][1];
-            if (e < pos + dist) {
+            if (e < curr + dist) {
                 return false;
             }
-            pos = Math.max(pos + dist, s);
+            curr = Math.max(curr + dist, s);
         }
         return true;
     }
