@@ -4,20 +4,20 @@ public class Main {
 
     private static Scanner sc = new Scanner(System.in);
 
-    private static int m;
-    private static int a;
-    private static int b;
+    private static long m;
+    private static long a;
+    private static long b;
 
     public static void main(String[] args) {
-        int minCount = Integer.MAX_VALUE;
-        int maxCount = Integer.MIN_VALUE;
+        long minCount = Long.MAX_VALUE;
+        long maxCount = Long.MIN_VALUE;
 
-        m = sc.nextInt();
-        a = sc.nextInt();
-        b = sc.nextInt();
+        m = sc.nextLong();
+        a = sc.nextLong();
+        b = sc.nextLong();
 
         for (int target = a; target <= b; target ++) {
-            int count = bisearch(target);
+            long count = bisearch(target);
             if (count < minCount) {
                 minCount = count;
             }
@@ -29,11 +29,11 @@ public class Main {
         System.out.printf("%d %d", minCount, maxCount);
     }
 
-    private static int bisearch(int target) {
-        int l = 1, r = m;
-        int count = 1;
+    private static long bisearch(long target) {
+        long l = 1, r = m;
+        long count = 1;
         while (l <= r) {
-            int mid = (l + r) / 2;
+            long mid = (l + r) / 2;
             if (mid == target) {
                 return count;
             }
