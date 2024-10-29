@@ -39,11 +39,9 @@ public class Main {
         for (int i = 0; i < m; i ++) {
             long s = lines[i][0];
             long e = lines[i][1];
-            for (long cur = s; cur <= e; cur ++) {
-                if (cur - pos >= dist) {
-                    cnt ++;
-                    pos = cur;
-                }
+            for (long cur = Math.max(s, pos + dist); cur <= e; cur += dist) {
+                cnt ++;
+                pos = cur;
             }
         }
         return cnt;
