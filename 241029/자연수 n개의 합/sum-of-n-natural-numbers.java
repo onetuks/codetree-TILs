@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         s = sc.nextLong();
 
-        long l = 1, r = (long) Math.pow(10, 9);
+        long l = 1, r = (long) Math.pow(10, 10);
         long n = r + 1;
         while (l <= r) {
             long m = (l + r) / 2;
