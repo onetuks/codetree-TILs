@@ -52,20 +52,27 @@ public class Main {
     }
 
     private static boolean isPossible(int diff) {
+        // for (int i = 0; i < points.size(); i ++) {
+        //     int[] point = points.get(i);
+        //     visited = new boolean[m][n];
+        //     visited[point[0]][point[1]] = true;
+        //     bfs(point, diff);
+        //     for (int j = i + 1; j < points.size(); j ++) {
+        //         int[] other = points.get(j);
+        //         if (!visited[other[0]][other[1]]) {
+        //             return false;
+        //         }
+        //     }
+        // }
+        // return true;
+        int[] point = points.get(0);
+        visited = new boolean[m][n];
+        visited[point[0]][point[1]] = true;
+        bfs(point, diff);
         for (int i = 0; i < points.size(); i ++) {
-            int[] point = points.get(i);
-            visited = new boolean[m][n];
-            visited[point[0]][point[1]] = true;
-            bfs(point, diff);
-            // for (int j = 0; j < m; j ++) {
-            //     System.out.println(Arrays.toString(visited[j]));
-            // }
-            // System.out.println(); 
-            for (int j = i + 1; j < points.size(); j ++) {
-                int[] other = points.get(j);
-                if (!visited[other[0]][other[1]]) {
-                    return false;
-                }
+            int[] other = points.get(i);
+            if (!visited[other[0]][other[1]]) {
+                return false;
             }
         }
         return true;
