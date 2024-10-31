@@ -56,7 +56,11 @@ public class Main {
             int[] point = points.get(i);
             visited = new boolean[m][n];
             visited[point[0]][point[1]] = true;
-            dfs(point[0], point[1], diff);
+            bfs(point, diff);
+            // for (int j = 0; j < m; j ++) {
+            //     System.out.println(Arrays.toString(visited[j]));
+            // }
+            // System.out.println(); 
             for (int j = i + 1; j < points.size(); j ++) {
                 int[] other = points.get(j);
                 if (!visited[other[0]][other[1]]) {
@@ -67,13 +71,21 @@ public class Main {
         return true;
     }
 
-    private static void dfs(int i, int j, int diff) {
-        for (int[] d: dlist) {
-            int di = i + d[0], dj = j + d[1];
-            if (di < 0 || di >= m || dj < 0 || dj >= n) continue;
-            if (Math.abs(matrix[di][dj] - matrix[i][j]) <= diff && !visited[di][dj]) {
-                visited[di][dj] = true;
-                dfs(di, dj, diff);
+    private static void bfs(int[] init, int diff) {
+        Queue<int[]> q = new LinkedList<>();
+        q.add(init);
+        visited[init[0]][init[1]] = true;
+
+        while (!q.isEmpty()) {
+            int[] point = q.poll();
+            int i = point[0], j = point[1];
+            for (int[] d: dlist) {
+                int di = i + d[0], dj = j + d[1];
+                if (di < 0 || di >= m || dj < 0 || dj >= n) continue;
+                if (!visited[di][dj] && Math.abs(matrix[di][dj] - matrix[i][j]) <= diff) {
+                    visited[di][dj] = true;
+                    q.add(new int[]{di, dj});
+                }
             }
         }
     }
