@@ -57,8 +57,7 @@ public class Main {
             visited = new boolean[m][n];
             visited[point[0]][point[1]] = true;
             dfs(point[0], point[1], diff);
-            for (int j = 0; j < points.size(); j ++) {
-                if (i == j) continue;
+            for (int j = i + 1; j < points.size(); j ++) {
                 int[] other = points.get(j);
                 if (!visited[other[0]][other[1]]) {
                     return false;
