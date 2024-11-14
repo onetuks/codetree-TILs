@@ -18,7 +18,7 @@ public class Main {
 
     private static void curved() {
         for (int i = 0; i <= n - 2; i ++) {
-            for (int j = 0; j <= n - 2; j ++) {
+            for (int j = 0; j <= m - 2; j ++) {
                 List<Integer> nums = new ArrayList<>();
                 for (int x = 0; x < 2; x ++) {
                     for (int y = 0; y < 2; y ++) {
