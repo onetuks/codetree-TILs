@@ -37,8 +37,10 @@ public class Main {
                 }
             }
             for (int val: map.values()) {
-                if (val >= m)
+                if (val >= m) {
                     ans ++;
+                    break;
+                }
             }
         }
 
@@ -56,8 +58,10 @@ public class Main {
             }
             
             for (int val: map.values()) {
-                if (val >= m)
+                if (val >= m) {
                     ans ++;
+                    break;
+                }
             }
         }
 
