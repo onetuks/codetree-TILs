@@ -38,7 +38,7 @@ public class Main {
         for (int i = 0; i < n; i ++) {
             for (int j = 0; j < n; j ++) {
                 int horiz = 0;
-                if (j + 2 < n) {
+                if (j + 2 < m) {
                     for (int k = 0; k < 3; k ++)
                         horiz += matrix[i][j + k];
                 }
@@ -62,12 +62,11 @@ public class Main {
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
 
-        matrix = new int[n][n];
+        matrix = new int[n][m];
         for (int i = 0; i < n; i ++) {
             st = new StringTokenizer(br.readLine());
-            for (int j = 0; j < n; j ++) {
+            for (int j = 0; j < m; j ++)
                 matrix[i][j] = Integer.parseInt(st.nextToken());
-            }
         }
     }
 }
