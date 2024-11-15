@@ -17,8 +17,7 @@ public class Main {
             for (int j = 0; j < n; j ++) {
                 for (int k = 0; k <= n; k ++) {
                     int count = getCount(i, j, k);
-                    // if (i >= 2)
-                    //     System.out.printf("i:%d j:%d k:%d c:%d\n", i, j, k, count);
+                    // System.out.printf("i:%d j:%d k:%d c:%d\n", i, j, k, count);
                     answer = Math.max(answer, count);
                 }
             }
@@ -28,8 +27,8 @@ public class Main {
     }
 
     private static int getCount(int x, int y, int k) {
-        int goldCount = 0; 
-        int gridCount = k * k + (k + 1) * (k + 1);
+        int goldCount = 0;
+        int gridCount = k == 0 ? 1 : k * k + (k + 1) * (k + 1);
         
         boolean[][] visited = new boolean[n][n];
         Queue<int[]> q = new LinkedList<>();
@@ -53,7 +52,7 @@ public class Main {
             }
         }
 
-        if (goldCount * m > gridCount) {
+        if (goldCount * m >= gridCount) {
             return goldCount;
         }
         return 0;
