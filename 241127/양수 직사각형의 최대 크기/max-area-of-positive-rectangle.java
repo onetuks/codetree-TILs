@@ -42,7 +42,7 @@ public class Main {
     private static boolean hasAllPositive(int i, int j, int k, int l) {
         for (int u = i; u <= k; u ++) {
             for (int v = j; v <= l; v ++) {
-                if (matrix[u][v] < 0) {
+                if (matrix[u][v] <= 0) {
                     return false;
                 }
             }
