@@ -26,7 +26,6 @@ public class Main {
         for (int i = 2; i < n; i ++) {
             for (int j = 1; j < n - 1; j ++) {
                 int sum = getSum(i, j);
-                // System.out.printf("i: %d j: %d sum: %d\n", i, j, sum);
                 answer = Math.max(answer, sum);
             }
         }
@@ -56,7 +55,7 @@ public class Main {
             sum += matrix[i][j];
         }
 
-        while (i + 1 < n && j + 1 < n) {
+        while (i + 1 < n && j + 1 < n - 1) {
             i = i + 1;
             j = j + 1;
             sum += matrix[i][j];
