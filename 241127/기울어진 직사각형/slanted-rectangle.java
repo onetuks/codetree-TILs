@@ -60,6 +60,9 @@ public class Main {
             i = i + 1;
             j = j + 1;
             sum += matrix[i][j];
+
+            if (i == x && j == y)
+                break;
         }
 
         return sum;
