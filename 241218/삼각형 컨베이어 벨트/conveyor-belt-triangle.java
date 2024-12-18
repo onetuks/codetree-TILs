@@ -38,7 +38,7 @@ public class Main {
 
     private static void print() {
         for (int i = 0; i < matrix.length; i ++) {
-            if (i % 3 == 0 && i != 0)
+            if (i % n == 0 && i != 0)
                 System.out.println();
             System.out.print(matrix[i] + " ");
         }
