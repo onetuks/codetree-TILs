@@ -12,7 +12,6 @@ public class Main {
         for (int i = 0; i < word.length; i ++) {
             word = shift(word);
             answer = Math.min(answer, getEncodedLength(word));
-            // System.out.println(word);
         }
 
         System.out.println(answer);
@@ -32,18 +31,20 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         
         int cnt = 0;
-        int chr = word[0];
+        char chr = word[0];
         for (char w: word) {
             if (chr == w) {
                 cnt++;
             } else {
-                sb.append(chr + cnt);
-                cnt = 0;
+                sb.append(chr);
+                sb.append(cnt);
+                cnt = 1;
                 chr = w;
             }
         }
         if (cnt > 0) {
-            sb.append(chr + cnt);
+            sb.append(chr);
+            sb.append(cnt);
         }
 
         return sb.length();
