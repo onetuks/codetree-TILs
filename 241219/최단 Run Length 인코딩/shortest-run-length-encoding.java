@@ -9,9 +9,10 @@ public class Main {
 
         char[] word = sc.nextLine().toCharArray();
 
-        for (int i = 1; i < word.length; i ++) {
+        for (int i = 0; i < word.length; i ++) {
             word = shift(word);
             answer = Math.min(answer, getEncodedLength(word));
+            // System.out.println(word);
         }
 
         System.out.println(answer);
