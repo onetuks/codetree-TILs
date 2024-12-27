@@ -21,11 +21,8 @@ public class Main {
             explode();
         }
 
-        if (bombs.isEmpty()) System.out.println(0);
-        else {
-            for (int bomb: bombs)
-                System.out.println(bomb);
-        }
+        System.out.println(bombs.size());
+        for (int bomb: bombs) System.out.println(bomb);
     }
 
     private static boolean explosible() {
