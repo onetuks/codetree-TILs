@@ -39,6 +39,8 @@ public class Main {
             val = bomb;
         }
 
+        if (cnt >= m) return true;
+
         return false;
     }
 
