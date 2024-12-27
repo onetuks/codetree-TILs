@@ -48,21 +48,39 @@ public class Main {
         }
     }
 
-    private static void fallDown() {
-        for (int j = 0; j < n; j ++) {
-            int[] temp = new int[n];
-            int p1 = 0;
-            for (int i = n - 1; i >= 0; i --) {
-                if (matrix[i][j] != 0)
-                    temp[p1++] = matrix[i][j];
-            }
+    // private static void fallDown() {
+    //     for (int j = 0; j < n; j ++) {
+    //         int[] temp = new int[n];
+    //         int p1 = 0;
+    //         for (int i = n - 1; i >= 0; i --) {
+    //             if (matrix[i][j] != 0)
+    //                 temp[p1++] = matrix[i][j];
+    //         }
 
-            int p2 = 0;
+    //         int p2 = 0;
+    //         for (int i = n - 1; i >= 0; i --) {
+    //             if (p2 <= p1)
+    //                 matrix[i][j] = temp[p2++];
+    //             else
+    //                 matrix[i][j] = 0;
+    //         }
+    //     }
+    // }
+
+    private static void fallDown() {
+        int[][] temp = new int[n][n];
+        for (int j = 0; j < n; j ++) {
+            int nextRow = n - 1;
             for (int i = n - 1; i >= 0; i --) {
-                if (p2 <= p1)
-                    matrix[i][j] = temp[p2++];
-                else
-                    matrix[i][j] = 0;
+                if (matrix[i][j] > 0) {
+                    temp[nextRow--][j] = matrix[i][j];
+                }
+            }
+        }
+
+        for (int i = 0; i < n; i ++) {
+            for (int j = 0; j < n; j ++) {
+                matrix[i][j] = temp[i][j];
             }
         }
     }
