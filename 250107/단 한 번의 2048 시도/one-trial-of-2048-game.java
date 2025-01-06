@@ -37,7 +37,7 @@ public class Main {
         for (int i = 0; i < 4; i ++) {
             int idx = 0;
             for (int j = 0; j < 3; j ++) {
-                if (matrix[i][j] == matrix[i][j + 1]) {
+                if (matrix[i][j] == matrix[i][j + 1] && matrix[i][j] != 0) {
                     temp[i][idx++] = matrix[i][j] * 2;
                     matrix[i][j + 1] = 0;
                 } else {
@@ -60,7 +60,7 @@ public class Main {
         for (int i = 0; i < 4; i ++) {
             int idx = 3;
             for (int j = 3; j > 0; j --) {
-                if (matrix[i][j] == matrix[i][j - 1]) {
+                if (matrix[i][j] == matrix[i][j - 1] && matrix[i][j] != 0) {
                     temp[i][idx--] = matrix[i][j] * 2;
                     matrix[i][j - 1] = 0;
                 } else {
@@ -83,7 +83,7 @@ public class Main {
         for (int j = 0; j < 4; j ++) {
             int idx = 0;
             for (int i = 0; i < 3; i ++) {
-                if (matrix[i][j] == matrix[i + 1][j]) {
+                if (matrix[i][j] == matrix[i + 1][j] && matrix[i][j] != 0) {
                     temp[idx++][j] = matrix[i][j] * 2;
                     matrix[i + 1][j] = 0;
                 } else {
@@ -108,7 +108,7 @@ public class Main {
         for (int j = 0; j < 4; j ++) {
             int idx = 3;
             for (int i = 3; i > 0; i --) {
-                if (matrix[i][j] == matrix[i - 1][j]) {
+                if (matrix[i][j] == matrix[i - 1][j] && matrix[i][j] != 0) {
                     temp[idx--][j] = matrix[i][j] * 2;
                     matrix[i - 1][j] = 0;
                 } else {
