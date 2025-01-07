@@ -3,120 +3,80 @@ import java.io.*;
 
 public class Main {
 
-    private static int[][] matrix;
+    private static final int NONE = -1;
+    private static int n = 4;
+    private static int[][] matrix = new int[n][n];
+    private static int[][] temp = new int[n][n];
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        matrix = new int[4][4];
-
-        for (int i = 0; i < 4; i ++) {
-            for (int j = 0; j < 4; j ++) {
+        for (int i = 0; i < n; i ++)
+            for (int j = 0; j < n; j ++)
                 matrix[i][j] = sc.nextInt();
-            }
-        }
 
         char dir = sc.next().charAt(0);
+        int cnt = 0;
+        
+        if (dir == 'R') cnt = 2;
+        else if (dir == 'U') cnt = 3;
+        else if (dir == 'D') cnt = 1;
 
-        solve(dir);
+        solve(cnt);
 
-        for (int i = 0; i < 4; i ++) {
-            for (int j = 0; j < 4; j ++) {
+        for (int i = 0; i < n; i ++) {
+            for (int j = 0; j < n; j ++)
                 System.out.print(matrix[i][j] + " ");
-            }
             System.out.println();
         }
     }
 
-    private static void solve(char dir) {
-        pull(dir);
-        merge(dir);
-        pull(dir);
+    private static void solve(int cnt) {
+        for (int i = 0; i < cnt; i ++) rotate();
+        pullLeft();
+        for (int i = 0; i < n - cnt; i ++) rotate();
     }
 
-    private static void merge(char dir) {
-        int[][] temp = new int[4][4];
+    private static void rotate() {
+        for (int i = 0; i < n; i ++)
+            for (int j = 0; j < n; j ++)
+                temp[i][j] = 0;
 
-        if (dir == 'L') {
-            for (int i = 0; i < 4; i ++) {
-                for (int j = 0; j < 3; j ++) {
-                    if (matrix[i][j] == matrix[i][j + 1]) {
-                        matrix[i][j] *= 2;
-                        matrix[i][j + 1] = 0;
-                    }
-                }
-            }
-        } else if (dir == 'R') {
-            for (int i = 0; i < 4; i ++) {
-                for (int j = 3; j > 0; j --) {
-                    if (matrix[i][j] == matrix[i][j - 1]) {
-                        matrix[i][j] *= 2;
-                        matrix[i][j - 1] = 0;
-                    }
-                }
-            }
-        } else if (dir == 'U') {
-            for (int j = 0; j < 4; j ++) {
-                for (int i = 0; i < 3; i ++) {
-                    if (matrix[i][j] == matrix[i + 1][j]) {
-                        matrix[i][j] *= 2;
-                        matrix[i + 1][j] = 0;
-                    }
-                }
-            }
-        } else {
-            for (int j = 0; j < 4; j ++) {
-                for (int i = 3; i > 0; i --) {
-                    if (matrix[i][j] == matrix[i - 1][j]) {
-                        matrix[i][j] *= 2;
-                        matrix[i - 1][j] = 0;
-                    }
-                }
-            }
-        }
-    }
+        for (int i = 0; i < n; i ++)
+            for (int j = 0; j < n; j ++)
+                temp[i][j] = matrix[n - j - 1][i];
 
-    private static void pull(char dir) {
-        int[][] temp = new int[4][4];
-
-        if (dir == 'L') {
-            for (int i = 0; i < 4; i ++) {
-                int idx = 0;
-                for (int j = 0; j < 4; j ++) {
-                    if (matrix[i][j] == 0) continue;
-                    temp[i][idx++] = matrix[i][j];
-                }
-            }
-        } else if (dir == 'R') {
-            for (int i = 0; i < 4; i ++) {
-                int idx = 3;
-                for (int j = 3; j >= 0; j --) {
-                    if (matrix[i][j] == 0) continue;
-                    temp[i][idx--] = matrix[i][j];
-                }
-            }
-        } else if (dir == 'U') {
-            for (int j = 0; j < 4; j ++) {
-                int idx = 0;
-                for (int i = 0; i < 4; i ++) {
-                    if (matrix[i][j] == 0) continue;
-                    temp[idx++][j] = matrix[i][j];
-                }
-            }
-        } else {
-            for (int j = 0; j < 4; j ++) {
-                int idx = 3;
-                for (int i = 3; i >= 0; i --) {
-                    if (matrix[i][j] == 0) continue;
-                    temp[idx--][j] = matrix[i][j];
-                }
-            }
-        }
-
-        for (int i = 0; i < 4; i ++) {
-            for (int j = 0; j < 4; j ++) {
+        for (int i = 0; i < n; i ++)
+            for (int j = 0; j < n; j ++)
                 matrix[i][j] = temp[i][j];
+    }
+
+    private static void pullLeft() {
+        for (int i = 0; i < n; i ++)
+            for (int j = 0; j < n; j ++)
+                temp[i][j] = 0;
+
+        for (int i = 0; i < n; i ++) {
+            int idx = 0, val = NONE;
+            for (int j = 0; j < n; j ++) {
+                if (matrix[i][j] == 0) continue;
+                if (val == NONE) {
+                    val = matrix[i][j];
+                } else if (matrix[i][j] == val) {
+                    temp[i][idx++] = val * 2;
+                    val = NONE;
+                } else {
+                    temp[i][idx++] = val;
+                    val = matrix[i][j];
+                }
             }
+
+            if (val != NONE)
+                temp[i][idx++] = val;
         }
+
+        for (int i = 0; i < n; i ++)
+            for (int j = 0; j < n; j ++) 
+                matrix[i][j] = temp[i][j];
     }
 }
