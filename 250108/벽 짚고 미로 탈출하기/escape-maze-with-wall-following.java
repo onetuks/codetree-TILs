@@ -28,6 +28,8 @@ public class Main {
             answer++;
             if (answer > n * n) break;
 
+            // System.out.printf("$ a:%d d:%d x:%d y:%d\n", answer, dir, x, y);
+
             int rightDir = (dir + 1) % dlist.length;
             int di = x + dlist[rightDir][0];
             int dj = y + dlist[rightDir][1];
@@ -49,7 +51,12 @@ public class Main {
             if (x < 0 || x >= n || y < 0 || y >= n) { 
                 answer++; 
                 break;
+            } else if (matrix[x][y] == '#') {
+                answer = -1;
+                break;
             }
+
+            // System.out.printf("# a:%d d:%d x:%d y:%d\n", answer, dir, x, y);
         }
 
         if (answer > n * n) answer = -1;
