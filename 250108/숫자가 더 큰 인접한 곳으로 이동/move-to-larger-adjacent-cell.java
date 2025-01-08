@@ -19,12 +19,10 @@ public class Main {
             for (int j = 0; j < n; j ++)
                 matrix[i][j] = sc.nextInt();
 
-        List<Integer> answer = new ArrayList<>();
-
         int i = r, j = c;
         while (true) {
             int curr = matrix[i][j];
-            answer.add(curr);
+            System.out.print(curr + " ");
             
             boolean existsBiggerValue = false;
             for (int[] d: dlist) {
@@ -39,10 +37,6 @@ public class Main {
             }
 
             if (!existsBiggerValue) break;
-        }
-
-        for (int ans: answer) {
-            System.out.print(ans + " ");
         }
     }
 }
