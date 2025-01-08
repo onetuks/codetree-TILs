@@ -36,14 +36,13 @@ public class Main {
             if (di < 0 || di >= n || dj < 0 || dj >= n) continue;
             if (matrix[di][dj] == '.') dir = rightDir;
 
-            di = x + dlist[dir][0];
-            dj = y + dlist[dir][1];
-            if (di < 0 || di >= n || dj < 0 || dj >= n) { 
-                answer++; 
-                break;
-            }
-            if (matrix[di][dj] == '#') {
-                dir = (dir - 1 < 0) ? 3 : dir - 1;
+            for (int k = 0; k < 4; k ++) {
+                di = x + dlist[dir][0];
+                dj = y + dlist[dir][1];
+                if (di < 0 || di >= n || dj < 0 || dj >= n) break;
+                if (matrix[di][dj] == '#') {
+                    dir = (dir - 1 < 0) ? 3 : dir - 1;
+                } else break;
             }
 
             x += dlist[dir][0];
