@@ -76,9 +76,10 @@ public class Main {
                     flag = true;
                     break;
                 }
-                if (matrix[nextHead.x][nextHead.y] != 1) deque.peekLast();
+                if (matrix[nextHead.x][nextHead.y] != 1) deque.pollLast();
                 if (deque.contains(nextHead)) {
                     flag = true;
+                    System.out.println("dup");
                     break;
                 }
                 deque.addFirst(nextHead);
