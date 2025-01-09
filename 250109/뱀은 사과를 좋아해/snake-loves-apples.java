@@ -73,7 +73,7 @@ public class Main {
                 Pair nextHead = new Pair(head.x + dlist[d][0], head.y + dlist[d][1]);
 
                 if (nextHead.isOutOfRange(n)) {
-                    flag = true;
+                    flag = true; // 커맨드 별로 횟수가 있으므로, 플래그 변수로 종료조건 시 프로그램 자체를 멈춰야 함
                     break;
                 }
                 if (matrix[nextHead.x][nextHead.y] != 1) deque.pollLast();
@@ -81,6 +81,8 @@ public class Main {
                     flag = true;
                     break;
                 }
+
+                matrix[nextHead.x][nextHead.y] = 0; // 이미 먹은 사과는 제거해야함
                 deque.addFirst(nextHead);
             }
 
