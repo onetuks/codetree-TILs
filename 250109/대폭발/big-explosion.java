@@ -35,7 +35,11 @@ public class Main {
                     matrix[i][j] = temp[i][j];
         }
 
-        int answer = Arrays.stream(matrix).flatMapToInt(Arrays::stream).sum();
+        // int answer = Arrays.stream(matrix).flatMapToInt(Arrays::stream).sum();
+        int answer = 0;
+        for (int i = 0; i < n; i ++)
+            for (int j = 0; j < n; j ++)
+                answer += matrix[i][j];
         System.out.println(answer);
     }
 
