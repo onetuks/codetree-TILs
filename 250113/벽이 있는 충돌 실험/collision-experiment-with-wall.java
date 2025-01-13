@@ -56,7 +56,7 @@ public class Main {
                 pairs.add(new Pair(x, y, d));
             }
 
-            for (int i = 0; i <= n * n; i ++) {
+            for (int i = 0; i <= n * 2; i ++) {
                 moveAll();
             }
 
@@ -83,6 +83,7 @@ public class Main {
                 di = pair.x;
                 dj = pair.y;
             }
+            if (matrix[di][dj] > 0) continue;
             Pair nPair = new Pair(di, dj, d);
             matrix[di][dj]++;
             temp.add(nPair);
