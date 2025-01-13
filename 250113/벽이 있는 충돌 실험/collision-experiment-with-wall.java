@@ -32,7 +32,7 @@ public class Main {
                 currGrid[x][y] = d;
             }
 
-            for (int i = 0; i <= n; i ++) {
+            for (int i = 0; i <= n * n; i ++) {
                 moveAll();
             }
 
