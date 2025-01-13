@@ -83,7 +83,6 @@ public class Main {
                 di = pair.x;
                 dj = pair.y;
             }
-            if (matrix[di][dj] > 0) continue;
             Pair nPair = new Pair(di, dj, d);
             matrix[di][dj]++;
             temp.add(nPair);
