@@ -15,22 +15,26 @@ public class Main {
     private static int[][] matrix;
     private static int[][] direct;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        t = sc.nextInt();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        t = Integer.parseInt(st.nextToken());
 
         for (int tc = 0; tc < t; tc ++) {
-            n = sc.nextInt();
-            m = sc.nextInt();
+            st = new StringTokenizer(br.readLine());
+            n = Integer.parseInt(st.nextToken());
+            m = Integer.parseInt(st.nextToken());
 
             matrix = new int[n][n];
             direct = new int[n][n];
 
             for (int i = 0; i < m; i ++) {
-                int x = sc.nextInt() - 1;
-                int y = sc.nextInt() - 1;
-                int d = map.get(sc.next().charAt(0));
+                st = new StringTokenizer(br.readLine());
+                int x = Integer.parseInt(st.nextToken()) - 1;
+                int y = Integer.parseInt(st.nextToken()) - 1;
+                int d = map.get(st.nextToken().charAt(0));
                 matrix[x][y] = 1;
                 direct[x][y] = d;
             }
@@ -59,25 +63,16 @@ public class Main {
                     int d = direct[i][j];
                     int di = i + dlist[d][0];
                     int dj = j + dlist[d][1];
-                    // System.out.printf("1) i:%d j:%d di:%d dj:%d d:%d\n", i, j, di, dj, d);
                     if (di < 0 || di >= n || dj < 0 || dj >= n) {
                         d = d >= 2 ? (d - 2) : (d + 2);
                         di = i;
                         dj = j;
                     }
-                    // System.out.printf("2) i:%d j:%d di:%d dj:%d d:%d\n", i, j, di, dj, d);
                     temp[di][dj]++;
                     demp[di][dj] = d;
                 }
             }
         }
-
-        // for (int i = 0; i < n; i ++) {
-        //     for (int j = 0; j < n; j ++) {
-        //         System.out.print(temp[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
 
         for (int i = 0; i < n; i ++) {
             for (int j = 0; j < n; j ++) {
@@ -90,12 +85,5 @@ public class Main {
                 }
             }
         }
-        
-        // for (int i = 0; i < n; i ++) {
-        //     for (int j = 0; j < n; j ++) {
-        //         System.out.print(matrix[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
     }
 }
