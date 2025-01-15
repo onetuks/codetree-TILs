@@ -94,7 +94,7 @@ public class Main {
 
                     int idx = 0;
                     while (matrix[i][j] > k) {
-                        perls.remove(temps.get(idx).i);
+                        perls.remove(temps.get(idx++).i);
                         matrix[i][j]--;
                     }
                 }
