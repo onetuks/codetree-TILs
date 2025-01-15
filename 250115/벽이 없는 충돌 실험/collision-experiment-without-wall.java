@@ -80,7 +80,7 @@ public class Main {
             }
 
             int answer = -1;
-            for (int i = 1; i <= 1000; i++) {
+            for (int i = 1; i <= 2000; i++) {
                 if (existsCollision()) {
                     answer = i;
                 }
