@@ -64,7 +64,7 @@ public class Main {
             }
 
             int answer = -1;
-            for (int time = 1; time <= 4000; time ++) {
+            for (int time = 1; time <= 2000; time ++) {
                 if (moveAll()) 
                     answer = time;
             }
