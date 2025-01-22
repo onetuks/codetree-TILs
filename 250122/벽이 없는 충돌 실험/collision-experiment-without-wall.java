@@ -3,12 +3,12 @@ import java.io.*;
 
 class Bead {
     int i;
-    int x;
-    int y;
+    float x;
+    float y;
     int w;
     int d;
 
-    Bead(int i, int x, int y, int w, int d) {
+    Bead(int i, float x, float y, int w, int d) {
         this.i = i;
         this.x = x;
         this.y = y;
@@ -32,7 +32,7 @@ class Bead {
 
 public class Main {
 
-    private static final int[][] dlist = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    private static final float[][] dlist = {{0, 0.5f}, {0, -0.5f}, {0.5f, 0}, {-0.5f, 0}};
     private static final Map<Character, Integer> map = new HashMap<Character, Integer>() {{
         put('U', 0);
         put('D', 1);
@@ -54,8 +54,8 @@ public class Main {
 
             for (int l = 0; l < n; l ++) {
                 StringTokenizer st = new StringTokenizer(br.readLine());
-                int x = Integer.parseInt(st.nextToken()) * 2;
-                int y = Integer.parseInt(st.nextToken()) * 2;
+                float x = Float.parseFloat(st.nextToken());
+                float y = Float.parseFloat(st.nextToken());
                 int w = Integer.parseInt(st.nextToken());
                 int d = map.get(st.nextToken().charAt(0));
 
