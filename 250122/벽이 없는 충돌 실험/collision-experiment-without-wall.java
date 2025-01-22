@@ -3,12 +3,12 @@ import java.io.*;
 
 class Bead {
     int i;
-    float x;
-    float y;
+    int x;
+    int y;
     int w;
     int d;
 
-    Bead(int i, float x, float y, int w, int d) {
+    Bead(int i, int x, int y, int w, int d) {
         this.i = i;
         this.x = x;
         this.y = y;
@@ -32,7 +32,7 @@ class Bead {
 
 public class Main {
 
-    private static final float[][] dlist = {{0, 0.5f}, {0, -0.5f}, {0.5f, 0}, {-0.5f, 0}};
+    private static final int[][] dlist = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
     private static final Map<Character, Integer> map = new HashMap<Character, Integer>() {{
         put('U', 0);
         put('D', 1);
@@ -54,8 +54,8 @@ public class Main {
 
             for (int l = 0; l < n; l ++) {
                 StringTokenizer st = new StringTokenizer(br.readLine());
-                float x = Float.parseFloat(st.nextToken());
-                float y = Float.parseFloat(st.nextToken());
+                int x = Integer.parseInt(st.nextToken());
+                int y = Integer.parseInt(st.nextToken());
                 int w = Integer.parseInt(st.nextToken());
                 int d = map.get(st.nextToken().charAt(0));
 
@@ -64,9 +64,9 @@ public class Main {
             }
 
             int answer = -1;
-            for (int time = 1; time <= 2002; time ++) {
+            for (int time = 1; time <= 2000; time ++) {
                 if (moveAll()) 
-                    answer = time;
+                    answer = time * 2;
             }
             System.out.println(answer);
         }
@@ -75,15 +75,20 @@ public class Main {
     private static boolean moveAll() {
         boolean result = false;
         Bead[] nBeads = new Bead[n];
-        // System.out.println(Arrays.toString(beads));
+
         for (int i = 0; i < n; i ++) {
             if (beads[i] == null) continue;
+
             Bead iBead = move(beads[i]);
             nBeads[i] = iBead;
             boolean collision = false;
+
             for (int j = 0; j < n; j ++) {
-                if (nBeads[j] == null || i == j) continue;
-                Bead jBead = nBeads[j];
+                if (i == j) continue;
+
+                Bead jBead = beads[j];
+                Bead nBead = nBeads[j];
+
                 if (Objects.equals(iBead, jBead)) {
                     collision = true;
                     result = true;
@@ -94,9 +99,21 @@ public class Main {
                         break;
                     }
                 }
+                if (Objects.equals(iBead, nBead)) {
+                    collision = true;
+                    result = true;
+                    if (iBead.w > nBead.w || (iBead.w == nBead.w && iBead.i > nBead.i)) {
+                        nBeads[j] = null;
+                    } else {
+                        nBeads[i] = null;
+                        break;
+                    }
+                }
             }
         }
+
         beads = nBeads;
+
         return result;
     }
 
