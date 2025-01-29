@@ -1,26 +1,22 @@
 import java.util.*;
 import java.io.*;
 
-class Section {
+class Pair {
     int s;
     int e;
 
-    Section(int s, int e) {
+    Pair(int s, int e) {
         this.s = s;
         this.e = e;
-    }
-
-    @Override
-    public String toString() {
-        return "{" + this.s + " " + this.e + "}";
     }
 }
 
 public class Main {
 
     private static int n;
-    private static List<Section> sections = new ArrayList<>();
     private static int answer = 0;
+    private static List<Pair> pairs = new ArrayList<>();
+    private static List<Integer> list = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -28,25 +24,47 @@ public class Main {
         n = sc.nextInt();
 
         for (int i = 0; i < n; i ++) {
-            Section section = new Section(sc.nextInt(), sc.nextInt());
-            sections.add(section);
+            pairs.add(new Pair(sc.nextInt(), sc.nextInt()));
         }
+        pairs.sort((a, b) -> a.s - b.s);
 
-        sections.sort((a, b) -> {
-            if (a.e == b.e)
-                return b.s - a.s;
-            return a.e - b.e;
-        });
-
-        int dist = 0;
-        for (Section section: sections) {
-            // System.out.println(section);
-            if (dist < section.s) {
-                answer++;
-                dist = section.e;
-            }
+        for (int i = 0; i < n; i ++) {
+            list.add(i);
+            calc(i);
+            list.remove(list.size() - 1);
         }
 
         System.out.println(answer);
+    }
+
+    private static void calc(int idx) {
+        if (idx == n - 1) {
+            answer = Math.max(answer, getCount());
+            return;
+        }
+
+        for (int i = idx + 1; i < n; i ++) {
+            Pair curr = pairs.get(idx);
+            Pair next = pairs.get(i);
+
+            if (curr.e < next.s) {
+                list.add(i);
+                calc(i);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+
+    private static int getCount() {
+        int count = 0;
+        int dist = 0;
+        for (int l: list) {
+            Pair p = pairs.get(l);
+            if (dist < p.s) {
+                count++;
+                dist = p.e;
+            }
+        }
+        return count;
     }
 }
