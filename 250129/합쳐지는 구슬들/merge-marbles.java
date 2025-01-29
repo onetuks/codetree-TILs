@@ -70,6 +70,14 @@ public class Main {
         }
 
         while (t-- > 0) {
+            // for (int i = 0; i < n; i ++) {
+            //     for (int j = 0; j < n; j ++) {
+            //         System.out.printf("%15s ", matrix[i][j]);
+            //     }
+            //     System.out.println();
+            // }
+            // System.out.println();
+
             moveAllBeads();
         }
 
@@ -98,7 +106,11 @@ public class Main {
                 int dj = j + DLIST[bead.d][1];
 
                 if (di < 0 || di >= n || dj < 0 || dj >= n) {
-                    temp[i][j] = bead.bounceOut();
+                    if (temp[i][j] == null) {
+                        temp[i][j] = bead.bounceOut();
+                    } else {
+                        temp[i][j] = Bead.merge(bead.bounceOut(), temp[i][j]);
+                    }
                     continue;
                 }
 
