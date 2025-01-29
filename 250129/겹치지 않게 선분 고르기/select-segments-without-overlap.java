@@ -32,7 +32,11 @@ public class Main {
             sections.add(section);
         }
 
-        sections.sort((a, b) -> a.s - b.s);
+        sections.sort((a, b) -> {
+            if (a.e == b.e)
+                return b.s - a.s;
+            return a.e - b.e;
+        });
 
         int dist = 0;
         for (Section section: sections) {
