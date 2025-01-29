@@ -9,13 +9,17 @@ class Section {
         this.s = s;
         this.e = e;
     }
+
+    @Override
+    public String toString() {
+        return "{" + this.s + " " + this.e + "}";
+    }
 }
 
 public class Main {
 
     private static int n;
     private static List<Section> sections = new ArrayList<>();
-    private static List<Integer> list = new ArrayList<>();
     private static int answer = 0;
 
     public static void main(String[] args) {
@@ -28,36 +32,17 @@ public class Main {
             sections.add(section);
         }
 
-        calc();
+        sections.sort((a, b) -> a.s - b.s);
 
-        System.out.println(answer);
-    }
-
-    private static void calc() {
-        if (list.size() == n) {
-            answer = Math.max(answer, getCount());
-            return;
-        }
-
-        for (int i = 0; i < n; i ++) {
-            if (!list.contains(i)) { 
-                list.add(i);
-                calc();
-                list.remove(list.size() - 1);
-            }
-        }
-    }
-
-    private static int getCount() {
-        int count = 0;
         int dist = 0;
-        for (int l: list) {
-            Section section = sections.get(l);
+        for (Section section: sections) {
+            // System.out.println(section);
             if (dist < section.s) {
-                count++;
+                answer++;
                 dist = section.e;
             }
         }
-        return count;
+
+        System.out.println(answer);
     }
 }
