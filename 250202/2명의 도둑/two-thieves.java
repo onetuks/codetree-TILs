@@ -56,21 +56,29 @@ public class Main {
     }
 
     private static List<Integer> gatherThingsUnderC(int x, int y) {
+        int maxSum = 0;
+        List<Integer> maxList = new ArrayList<>();
+
         List<Integer> vals = new ArrayList<>();
         for (int i = y; i < y + m; i ++)
             vals.add(matrix[x][i]);
-        Collections.sort(vals, Collections.reverseOrder());
         
-        List<Integer> result = new ArrayList<>();
-        int sum = 0;
-        for (int val: vals) {
-            sum += val;
-            if (sum > c) {
-                sum -= val;
-                break;
+        for (int i = 0; i < (1 << vals.size()); i ++ ){
+            int sum = 0;
+            List<Integer> temp = new ArrayList<>();
+            for (int j = 0; j < vals.size(); j ++) {
+                if ((i & (1 << j)) != 0) {
+                    sum += vals.get(j);
+                    temp.add(vals.get(j));
+                }
             }
-            result.add(val);
+
+            if (sum <= c && sum > maxSum) {
+                maxSum = sum;
+                maxList = temp;
+            }
         }
-        return result;
+
+        return maxList;
     }
 }
