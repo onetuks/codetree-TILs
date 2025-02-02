@@ -30,12 +30,8 @@ public class Main {
     }
 
     private static boolean impossible(int num) {
-        int cnt = 1;
-        for (int i = numbers.size() - 1; i >= 0; i --) {
-            if (num != numbers.get(i)) break;
-            cnt++;
-        }
-        return cnt >= 3;
+        int length = numbers.size();
+        return length >= 2 && num == numbers.get(length - 1) && num == numbers.get(length - 2);
     }
 
     private static void print() {
