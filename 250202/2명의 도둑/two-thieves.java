@@ -15,29 +15,31 @@ public class Main {
         c = sc.nextInt();
 
         matrix = new int[n][n];
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j ++)
+        for (int i =0;i < n; i++)
+            for (int j =0; j < n; j++)
                 matrix[i][j] = sc.nextInt();
 
-        gatherThings();
+        solve();
 
         System.out.println(answer);
     }
 
-    private static void gatherThings() {
-        for (int i = 0; i < n; i++) {
+    private static void solve() {
+        for (int i = 0; i < n; i ++) {
             for (int j = 0; j <= n - m; j ++) {
-                List<Integer> list1 = gatherThingsUnderC(i, j);
-                for (int k = 0; k < n; k ++) {
-                    for (int l = 0; l <= n - m; l ++) {
-                        if (i == k && ((j <= l && l <= j + m) || (l <= j && j <= l + m))) continue;
-                        List<Integer> list2 = gatherThingsUnderC(k, l);
-                        
+                List<Integer> list1 = gather(i, j);
+                for (int x = 0; x < n; x ++) {
+                    for (int y = 0; y <= n - m; y ++) {
+                        if (i == x && ((j <= y && y < j + m) || (y <= j && j < y + m))) continue;
+                        List<Integer> list2 = gather(x, y);
+
                         // debug
                         // if (answer < getScore(list1, list2)) {
-                        //     System.out.println(i + " " + j + " " + k + " " + l + " : " + getScore(list1, list2));
-                        //     list1.stream().forEach(System.out::println);
-                        //     list2.stream().forEach(System.out::println);
+                        //     System.out.println(i + " " + j + " " + x + " " + y + ": " + getScore(list1, list2));
+                        //     for (int l: list1) System.out.print(l + " " );
+                        //     System.out.println();
+                        //     for (int l: list2) System.out.print(l + " " );
+                        //     System.out.println();
                         // }
                         // debug
 
@@ -48,29 +50,22 @@ public class Main {
         }
     }
 
-    private static int getScore(List<Integer> list1, List<Integer> list2) {
-        int result = 0;
-        for (int l: list1) result += l * l;
-        for (int l: list2) result += l * l;
-        return result;
-    }
-
-    private static List<Integer> gatherThingsUnderC(int x, int y) {
-        int maxSum = 0;
+    private static List<Integer> gather(int x, int y) {
+        int maxSum = Integer.MIN_VALUE;
         List<Integer> maxList = new ArrayList<>();
 
         List<Integer> vals = new ArrayList<>();
         for (int i = y; i < y + m; i ++)
             vals.add(matrix[x][i]);
-        
-        for (int i = 0; i < (1 << vals.size()); i ++ ){
+
+        for (int bitmask = 0; bitmask < (1 << vals.size()); bitmask ++) {
             int sum = 0;
             List<Integer> temp = new ArrayList<>();
-            for (int j = 0; j < vals.size(); j ++) {
-                if ((i & (1 << j)) != 0) {
-                    sum += vals.get(j);
-                    temp.add(vals.get(j));
-                }
+            for (int i = 0; i < vals.size(); i ++) {
+                if ((bitmask & (1 << i)) == 0) continue;
+                int val = vals.get(i);
+                sum += val;
+                temp.add(val);
             }
 
             if (sum <= c && sum > maxSum) {
@@ -80,5 +75,12 @@ public class Main {
         }
 
         return maxList;
+    }
+
+    private static int getScore(List<Integer> list1, List<Integer> list2) {
+        int result = 0;
+        for (int l: list1) result += l * l;
+        for (int l: list2) result += l * l;
+        return result;
     }
 }
