@@ -26,10 +26,10 @@ public class Main {
 
     private static void gatherThings() {
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n - m; j ++) {
+            for (int j = 0; j <= n - m; j ++) {
                 List<Integer> list1 = gatherThingsUnderC(i, j);
                 for (int k = 0; k < n; k ++) {
-                    for (int l = 0; l < n - m; l ++) {
+                    for (int l = 0; l <= n - m; l ++) {
                         if (i == k && ((j <= l && l <= j + m) || (l <= j && j <= l + m))) continue;
                         List<Integer> list2 = gatherThingsUnderC(k, l);
                         
