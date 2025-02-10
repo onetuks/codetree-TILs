@@ -22,7 +22,7 @@ public class Main {
     }
 
     private static void backtrack(int idx, int cnt) {
-        if (idx == n - 1) {
+        if (idx >= n - 1) {
             answer = Math.min(answer, cnt);
             return;
         }
