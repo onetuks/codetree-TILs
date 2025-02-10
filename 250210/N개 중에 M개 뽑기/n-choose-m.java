@@ -4,7 +4,7 @@ import java.io.*;
 public class Main {
 
     private static int n, m;
-    private static int[] numbers;
+    private static List<Integer> numbers = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -12,23 +12,20 @@ public class Main {
         n = sc.nextInt();
         m = sc.nextInt();
 
-        numbers = new int[m];
-
-        combinations(1, 0);
+        combinations(0, 0);
     }
 
     private static void combinations(int num, int cnt) {
-        if (num == n + 1 || cnt == m) {
-            if (cnt == m)
-                printNumbers();
+        if (cnt == m) {
+            printNumbers();
             return;
         }
 
-        numbers[cnt] = num;
-        combinations(num + 1, cnt + 1);
-        numbers[cnt] = 0;
-
-        combinations(num + 1, cnt);
+        for (int i = num + 1; i <= n; i ++) {
+            numbers.add(i);
+            combinations(i, cnt + 1);
+            numbers.remove(numbers.size() - 1);
+        }
     }
 
     private static void printNumbers() {
