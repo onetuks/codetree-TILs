@@ -20,11 +20,6 @@ public class Main {
     private static void makeSequence() {
         if (answer != null) return;
         if (sequence.size() == n) {
-            // // debug
-            // for (int seq: sequence) System.out.print(seq + " " );
-            // System.out.println(isImpossible());
-            // // debug
-
             if (!isImpossible()) {
                 StringBuilder sb = new StringBuilder();
                 for (int seq: sequence)
@@ -34,6 +29,8 @@ public class Main {
             return;
         }
 
+        if (isImpossible()) return;
+
         for (int i = 4; i <= 6; i ++) {
             sequence.add(i);
             makeSequence();
@@ -42,9 +39,9 @@ public class Main {
     }
 
     private static boolean isImpossible() {
-        for (int tab = 1; tab <= n / 2; tab ++) {
+        for (int tab = 1; tab <= sequence.size() / 2; tab ++) {
             int idx = 0;
-            while (idx <= n - tab * 2) {
+            while (idx <= sequence.size() - tab * 2) {
                 int[] preSub = buildSubArray(idx, tab);
                 int[] posSub = buildSubArray(idx + tab, tab);
                 if (isSame(preSub, posSub))
