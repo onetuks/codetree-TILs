@@ -45,10 +45,9 @@ public class Main {
         for (int tab = 1; tab <= n / 2; tab ++) {
             int idx = 0;
             while (idx <= n - tab * 2) {
-                String preSub = buildSubString(idx, tab);
-                String posSub = buildSubString(idx + tab, tab);
-                // System.out.println(preSub + " " + posSub);
-                if (Objects.equals(preSub, posSub))
+                int[] preSub = buildSubArray(idx, tab);
+                int[] posSub = buildSubArray(idx + tab, tab);
+                if (isSame(preSub, posSub))
                     return true;
                 idx++;
             }
@@ -56,11 +55,18 @@ public class Main {
         return false;
     }
 
-    private static String buildSubString(int idx, int tab) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < tab; i ++) {
-            sb.append(sequence.get(i + idx));
+    private static int[] buildSubArray(int idx, int tab) {
+        int[] sub = new int[tab];
+        for (int i = 0; i < tab; i ++)
+            sub[i] = sequence.get(i + idx);
+        return sub;
+    }
+
+    private static boolean isSame(int[] pre, int[] pos) {
+        for (int i = 0; i < pre.length; i ++) {
+            if (pre[i] != pos[i])
+                return false;
         }
-        return sb.toString();
+        return true;
     }
 }
