@@ -17,18 +17,18 @@ public class Main {
         combinations(1, 0);
     }
 
-    private static void combinations(int num, int idx) {
-        if (num == n + 1 || idx == m) {
-            if (idx == m) 
+    private static void combinations(int num, int cnt) {
+        if (num == n + 1 || cnt == m) {
+            if (cnt == m)
                 printNumbers();
             return;
         }
 
-        for (int i = num; i <= n; i ++) {
-            numbers[idx] = i;
-            combinations(i + 1, idx + 1);
-            numbers[idx] = 0;
-        }
+        numbers[cnt] = num;
+        combinations(num + 1, cnt + 1);
+        numbers[cnt] = 0;
+
+        combinations(num + 1, cnt);
     }
 
     private static void printNumbers() {
