@@ -29,9 +29,7 @@ public class Main {
             return;
         }
 
-        for (int i = idx; i < n; i ++) {
-            choose(i + 1, cnt + 1, val ^ numbers[i]);
-            choose(i + 1, cnt, val);
-        }
+        choose(i + 1, cnt + 1, val ^ numbers[i]);
+        choose(i + 1, cnt, val);
     }
 }
