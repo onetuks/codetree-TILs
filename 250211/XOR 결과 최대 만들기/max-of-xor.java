@@ -24,12 +24,13 @@ public class Main {
     }
 
     private static void choose(int idx, int cnt, int val) {
-        if (cnt == m) {
-            answer = Math.max(answer, val);
+        if (cnt == m || idx == n) {
+            if (cnt == m)
+                answer = Math.max(answer, val);
             return;
         }
 
-        choose(i + 1, cnt + 1, val ^ numbers[i]);
-        choose(i + 1, cnt, val);
+        choose(idx + 1, cnt + 1, val ^ numbers[idx]);
+        choose(idx + 1, cnt, val);
     }
 }
