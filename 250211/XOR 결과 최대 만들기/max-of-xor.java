@@ -30,7 +30,7 @@ public class Main {
         }
 
         for (int i = idx; i < n; i ++) {
-            chosen.add(i);
+            chosen.add(numbers[i]);
             choose(i + 1);
             chosen.remove(chosen.size() - 1);
         }
@@ -38,9 +38,8 @@ public class Main {
 
     private static int getXorResult() {
         int result = 0;
-        for (int c: chosen) {
+        for (int c: chosen)
             result ^= c;
-        }
         return result;
     }
 }
