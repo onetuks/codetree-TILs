@@ -37,7 +37,7 @@ public class Main {
 
     private static void choose(int idx) {
         if (chosen.size() == m) {
-            updateMinDist();
+            answer = Math.min(answer, getMaxDist());
             return;
         }
 
@@ -48,10 +48,12 @@ public class Main {
         }
     }
 
-    private static void updateMinDist() {
-        for (int i = 0; i < n; i ++)
-            for (int j = i + 1; j < n; j ++)
-                answer = Math.min(answer, getDist(nodes.get(i), nodes.get(j)));
+    private static int getMaxDist() {
+        int maxDist = 0;
+        for (int i = 0; i < m; i ++)
+            for (int j = i + 1; j < m; j ++)
+                maxDist = Math.max(maxDist, getDist(chosen.get(i), chosen.get(j)));
+        return maxDist;
     }
 
     private static int getDist(Node node1, Node node2) {
