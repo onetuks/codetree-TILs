@@ -5,7 +5,6 @@ public class Main {
     
     private static int n;
     private static List<Integer> numbers = new ArrayList<>();
-    private static Set<Integer> group = new HashSet<>();
     private static int totalSum = 0;
     private static int answer = Integer.MAX_VALUE;
 
@@ -20,27 +19,19 @@ public class Main {
             totalSum += num;
         }
 
-        makeGroup(0);
+        makeGroup(0, 0, 0);
 
         System.out.print(answer);
     }
 
-    private static void makeGroup(int idx) {
-        if (group.size() == n) {
-            answer = Math.min(answer, getDiff());
+    private static void makeGroup(int idx, int cnt, int val) {
+        if (cnt == n || idx == 2 * n) {
+            if (cnt == n)
+                answer = Math.min(answer, Math.abs(val - (totalSum - val)));
             return;
         }
 
-        for (int i = idx; i < 2 * n; i++) {
-            group.add(numbers.get(i));
-            makeGroup(i + 1);
-            group.remove(numbers.get(i));
-        }
-    }
-
-    private static int getDiff() {
-        int sumOfGroup = 0;
-        for (int g: group) sumOfGroup += g;
-        return Math.abs(sumOfGroup - (totalSum - sumOfGroup));
+        makeGroup(idx + 1, cnt + 1, val + numbers.get(idx));
+        makeGroup(idx + 1, cnt, val);
     }
 }
