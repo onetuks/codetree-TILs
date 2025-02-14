@@ -29,18 +29,20 @@ public class Main {
         }
 
         visited[1] = true;
-        int answer = dfs(1);
+        dfs(1);
 
-        System.out.println(answer - 1);
+        int answer = 0;
+        for (boolean v: visited) {
+            if (v) answer++;
+        }
+        System.out.print(answer - 1);
     }
 
-    private static int dfs(int node) {
-        int cnt = 1;
+    private static void dfs(int node) {
         for (int next: adj[node]) {
             if (visited[next]) continue;
             visited[next] = true;
-            cnt += dfs(next);
+            dfs(next);
         }
-        return cnt;
     }
 }
