@@ -12,16 +12,18 @@ public class Main {
     private static int villageCnt = 0;
     private static List<Integer> populations = new ArrayList<>();
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        n = sc.nextInt();
+        n = Integer.parseInt(br.readLine());
 
         matrix = new int[n][n];
         visited = new boolean[n][n];
-        for (int i = 0; i < n; i ++)
+        for (int i = 0; i < n; i ++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
             for (int j = 0; j < n; j ++)
-                matrix[i][j] = sc.nextInt();
+                matrix[i][j] = Integer.parseInt(st.nextToken());
+        }
 
         for (int i = 0; i < n; i ++) {
             for (int j = 0; j < n; j ++) {
