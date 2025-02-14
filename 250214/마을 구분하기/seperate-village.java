@@ -35,7 +35,7 @@ public class Main {
             }
         }
 
-        populations.sort((a, b) -> a - b);
+        Collections.sort(populations);
         System.out.println(populations.size());
         for (int population: populations)
             System.out.println(population);
