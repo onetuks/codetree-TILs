@@ -35,7 +35,8 @@ public class Main {
         for (int i = 0; i< n; i ++) {
             for (int j = 0; j < n;j ++) {
                 if (visited[i][j]) continue;
-                int count = dfs(i, j) - 1;
+                visited[i][j] = true;
+                int count = dfs(i, j);
                 maxBlockSize = Math.max(maxBlockSize, count);
                 if (count >= 4)
                     explodedBombCount++;
