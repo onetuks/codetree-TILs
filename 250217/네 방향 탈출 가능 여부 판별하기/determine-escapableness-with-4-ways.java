@@ -42,14 +42,14 @@ public class Main {
     }
 
     private static void searchPath() {
-        Queue<Node> q = new LinkedList<>();
+        Queue<Node> q = new ArrayDeque<>();
         visited = new boolean[n][m];
 
         q.add(new Node(0, 0));
         visited[0][0] = true;
 
         while (!q.isEmpty()) {
-            Node node = q.po();
+            Node node = q.poll();
 
             if (node.x == n - 1 && node.y == m - 1) {
                 answer = 1;
