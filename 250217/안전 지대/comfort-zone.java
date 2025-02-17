@@ -9,6 +9,8 @@ public class Main {
     private static int[][] matrix;
     private static boolean[][] visited;
 
+    private static int maxValue = -1;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -19,14 +21,17 @@ public class Main {
         m = sc.nextInt();
 
         matrix = new int[n][m];
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < m; j++)
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
                 matrix[i][j] = sc.nextInt();
+                maxValue = Math.max(maxValue, matrix[i][j]);
+            }
+        }
 
-        for (int k = 100; k > 0; k--) {
+        for (int k = maxValue; k > 0; k--) {
             visited = new boolean[n][m];
             int count = getRegionCount(k);
-            if (count > maxCount) {
+            if (count >= maxCount) {
                 maxCount = count;
                 answer = k;
             }
