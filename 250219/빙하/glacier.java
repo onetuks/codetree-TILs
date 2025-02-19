@@ -64,13 +64,7 @@ public class Main {
         int count = 0;
 
         effect = new boolean[n][m];
-        for (int i = 0; i < n; i ++) {
-            for (int j = 0; j < m; j ++) {
-                if (effect[i][j] || matrix[i][j] > 0) continue;
-                effect[i][j] = true;
-                dfs(i, j);
-            }
-        }
+        dfs(0, 0);
 
         for (int i = 0; i < n; i ++)
             for (int j = 0; j < m; j++)
