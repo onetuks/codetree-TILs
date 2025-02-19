@@ -16,6 +16,7 @@ public class Main {
 
     private static int n, m;
     private static int[][] matrix;
+    private static boolean[][] effect;
     
     private static int finalMeltingTime = 0;
     private static int finalIcebergCount = 0;
@@ -47,9 +48,29 @@ public class Main {
         System.out.println(finalMeltingTime + " " + finalIcebergCount);
     }
 
+    private static void dfs(int i, int j) {
+        for (int[] d: DLIST) {
+            int di = i + d[0];
+            int dj = j + d[1];
+            if (di < 0 || di >= n || dj < 0 || dj >= m) continue;
+            if (effect[di][dj] || matrix[di][dj] > 0) continue;
+            effect[di][dj] = true;
+            dfs(di, dj);
+        }
+    }
+
     private static int melt() {
         Queue<Node> q = new ArrayDeque<>();
         int count = 0;
+
+        effect = new boolean[n][m];
+        for (int i = 0; i < n; i ++) {
+            for (int j = 0; j < m; j ++) {
+                if (effect[i][j] || matrix[i][j] > 0) continue;
+                effect[i][j] = true;
+                dfs(i, j);
+            }
+        }
 
         for (int i = 0; i < n; i ++)
             for (int j = 0; j < m; j++)
@@ -73,7 +94,7 @@ public class Main {
     }
 
     private static boolean isEffectableIceberg(int i, int j) {
-        if (matrix[i][j] == 1) 
+        if (matrix[i][j] == 1 || !effect[i][j]) 
             return false;
 
         int neighborIcebergCnt = 0, neighborWaterCnt = 0;
