@@ -40,7 +40,11 @@ public class Main {
 
         bfs(0, 0);
 
-        System.out.println(steps[n - 1][m - 1]);
+        int answer = steps[n - 1][m - 1];
+        if (answer >= Integer.MAX_VALUE)
+            System.out.println(-1);
+        else
+            System.out.println(steps[n - 1][m - 1]);
     }
 
     private static void bfs(int i, int j) {
