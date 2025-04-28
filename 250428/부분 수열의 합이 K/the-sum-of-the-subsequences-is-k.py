@@ -1,20 +1,26 @@
-import sys
-
-input = sys.stdin.readline
-
 n, k = map(int, input().split())
 arr = list(map(int, input().split()))
 
+psum = []
+s = 0
+for a in arr:
+    s += a
+    psum.append(s)
+
 ans = 0
+i, j = 0, 1
+while i < n and j < n:
+    sval = psum[j] - psum[i]
+    # print(i, j, sval)
+    if sval < k: j += 1
+    elif sval == k:
+        i += 1
+        j += 1
+        ans += 1
+    else: i += 1
 
-pfsum = [0] * (n + 1)
-for i in range(1, n):
-    pfsum[i] = (pfsum[i - 1] + arr[i])
-
-for i in range(n + 1):
-    for j in range(n + 1):
-        val = pfsum[j] - pfsum[i]
-        if val == k:
-            ans += 1
+for p in psum:
+    if p == k:
+        ans += 1
 
 print(ans)
