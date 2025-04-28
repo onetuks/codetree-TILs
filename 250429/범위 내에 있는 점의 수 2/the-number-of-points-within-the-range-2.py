@@ -1,6 +1,6 @@
 n, q = map(int, input().split())
 bound = int(1e6) + 10
-psum = [0] * bound
+psum = [0] * (bound + 1)
 
 for p in list(map(int, input().split())):
     psum[p] += 1
