@@ -1,10 +1,11 @@
 n, q = map(int, input().split())
-plist = [0] * int(1e6)
-psum = [0] * int(1e6)
+bound = int(1e6) + 1
+plist = [0] * bound
+psum = [0] * bound
 
 for p in list(map(int, input().split())):
     plist[p] = 1
-for i in range(1, len(plist)):
+for i in range(1, bound):
     psum[i] = psum[i - 1] + plist[i]
 
 for _ in range(q):
