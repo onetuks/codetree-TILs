@@ -1,13 +1,12 @@
 n, q = map(int, input().split())
-bound = int(1e6) + 2
-plist = [0] * bound
+bound = int(1e6) + 1
 psum = [0] * bound
 
 for p in list(map(int, input().split())):
-    plist[p + 1] = 1
+    psum[p] = 1
 for i in range(1, bound):
-    psum[i] = psum[i - 1] + plist[i]
+    psum[i] += psum[i - 1]
 
 for _ in range(q):
     a, b = map(int, input().split())
-    print(psum[b + 1] - psum[a])
+    print(psum[b] - psum[a - 1])
