@@ -14,8 +14,10 @@ def get_max_sum(x1, x2):
     for y in range(1, n + 1):
         val = get_sum(x1, y, x2, y)
         dp[y] = max(val, dp[y-1] + val)
-    # print(x1, x2, dp)
-    return max(dp)
+    max_sum = -1e9
+    for y in range(1, n + 1):
+        max_sum = max(max_sum, dp[y])
+    return max_sum
 
 psum = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
 for i in range(1, n + 1):
