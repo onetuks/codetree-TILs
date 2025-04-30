@@ -4,11 +4,11 @@ for _ in range(n):
     grid.append(" " + input())
 
 # Please write your code here.
-apsum = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
-bpsum = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
-cpsum = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
+apsum = [[0 for _ in range(m + 1)] for _ in range(n + 1)]
+bpsum = [[0 for _ in range(m + 1)] for _ in range(n + 1)]
+cpsum = [[0 for _ in range(m + 1)] for _ in range(n + 1)]
 for i in range(1, n+1):
-    for j in range(1, n + 1):
+    for j in range(1, m + 1):
         a_cnt = apsum[i-1][j] + apsum[i][j-1] - apsum[i-1][j-1]
         b_cnt = bpsum[i-1][j] + bpsum[i][j-1] - bpsum[i-1][j-1]
         c_cnt = cpsum[i-1][j] + cpsum[i][j-1] - cpsum[i-1][j-1]
