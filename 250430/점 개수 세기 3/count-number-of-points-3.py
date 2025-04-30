@@ -1,20 +1,24 @@
-from sys import stdin
 from sortedcontainers import SortedSet
-from bisect import bisect_left
 
-input = stdin.readline
+# 변수 선언 및 입력:
+n, q = tuple(map(int, input().split()))
+arr = list(map(int, input().split()))
+queries = [
+    tuple(map(int, input().split()))
+    for _ in range(q)
+]
 
-n, q = map(int, input().split())
-points = SortedSet(list(map(int, input().split())))
-queries = [tuple(map(int, input().split())) for _ in range(q)]
+# 주어진 x좌표값들을 전부 treeset에 넣어줍니다.
+nums = SortedSet(arr)
 
-mapper = {-1e10:1}
-idx = 2
-for point in points:
-    mapper[point] = idx
-    idx += 1
-
+# treeset에서 정점을 작은 번호부터 뽑으면서
+# 각 정점별로 1번부터 순서대로 매칭하여
+# 그 결과를 hashmap에 넣어줍니다.
+mapper = dict()
+cnt = 1
+for num in nums:
+    mapper[num] = cnt
+    cnt += 1
+    
 for a, b in queries:
-    l = mapper[points[bisect_left(points, a)]]
-    r = mapper[points[bisect_left(points, b)]]
-    print(r - l + 1)
+    print(mapper[b] - mapper[a] + 1)
