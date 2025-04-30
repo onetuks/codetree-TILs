@@ -8,8 +8,8 @@ n, q = map(int, input().split())
 points = SortedSet(list(map(int, input().split())))
 queries = [tuple(map(int, input().split())) for _ in range(q)]
 
-mapper = dict()
-idx = 0
+mapper = {-1e10:1}
+idx = 2
 for point in points:
     mapper[point] = idx
     idx += 1
