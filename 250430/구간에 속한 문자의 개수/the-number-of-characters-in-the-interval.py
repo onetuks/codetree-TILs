@@ -1,5 +1,5 @@
 n, m, k = map(int, input().split())
-grid = [" " * (n + 1)]
+grid = [" " * (m + 1)]
 for _ in range(n):
     grid.append(" " + input())
 
