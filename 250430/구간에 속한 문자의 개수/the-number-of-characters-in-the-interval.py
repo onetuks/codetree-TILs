@@ -14,7 +14,6 @@ n, m, k = map(int, input().split())
 grid = [" " * (n + 1)]
 for _ in range(n):
     grid.append(" " + input())
-queries = [tuple(map(int, input().split())) for _ in range(k)]
 
 def get_cnt(i, j, key):
     if key == "a":
@@ -37,7 +36,8 @@ for i in range(1, n+1):
             c_cnt += 1
         psum[i][j] = Info(a_cnt, b_cnt, c_cnt)
 
-for i, j, x, y in queries:
+for _ in range(k):
+    i, j, x, y = map(int, input().split())
     a_cnt = psum[x][y].a_cnt - psum[x][j-1].a_cnt - psum[i-1][y].a_cnt + psum[i-1][j-1].a_cnt
     b_cnt = psum[x][y].b_cnt - psum[x][j-1].b_cnt - psum[i-1][y].b_cnt + psum[i-1][j-1].b_cnt
     c_cnt = psum[x][y].c_cnt - psum[x][j-1].c_cnt - psum[i-1][y].c_cnt + psum[i-1][j-1].c_cnt
