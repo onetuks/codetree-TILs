@@ -5,25 +5,14 @@ for i in range(n):
     for j in range(n):
         psum[i][j+1] += psum[i][j] + line[j]
 
-# for p in psum:
-#     print(p)
-
 def get_sum(r, c):
     val = 0
     for i in range(k+1):
         if r-i < 0: break
-        v = psum[r-i][min(n, c+k-i)] - psum[r-i][max(0, c-k+i-1)]
-        # if r == 2 and c == 3:
-        #     print(r-i, min(n, c+k-i), max(0, c-k+i-1))
-        #     print(v)
-        val += v
+        val += psum[r-i][min(n, c+k-i)] - psum[r-i][max(0, c-k+i-1)]
     for i in range(1, k+1):
         if r+i >= n: break
-        v = psum[r+i][min(n, c+k-i)] - psum[r+i][max(0, c-k+i-1)]
-        # if r == 3 and c == 2:
-        #     print(r+i, min(n, c+k-i), max(0, c-k+i-1))
-        #     print(v)
-        val += v
+        val += psum[r+i][min(n, c+k-i)] - psum[r+i][max(0, c-k+i-1)]
     return val
 
 ans = -1e9
