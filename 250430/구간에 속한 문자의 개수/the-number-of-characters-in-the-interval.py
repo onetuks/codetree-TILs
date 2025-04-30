@@ -37,15 +37,8 @@ for i in range(1, n+1):
             c_cnt += 1
         psum[i][j] = Info(a_cnt, b_cnt, c_cnt)
 
-for ps in psum:
-    for p in ps:
-        print(p, end=" / ")
-    print()
-
 for i, j, x, y in queries:
     a_cnt = psum[x][y].a_cnt - psum[x][j-1].a_cnt - psum[i-1][y].a_cnt + psum[i-1][j-1].a_cnt
-    a_cnt = psum[x][y].a_cnt - psum[x][j-1].a_cnt - psum[i-1][y].a_cnt + psum[i-1][j-1].a_cnt
-    a_cnt = get_cnt(x, y, "a") - get_cnt(x, j-1, "a") - get_cnt(i-1, y, "a") + get_cnt(i-1, j-1, "a")
-    b_cnt = get_cnt(x, y, "b") - get_cnt(x, j-1, "b") - get_cnt(i-1, y, "b") + get_cnt(i-1, j-1, "b")
-    c_cnt = get_cnt(x, y, "c") - get_cnt(x, j-1, "c") - get_cnt(i-1, y, "c") + get_cnt(i-1, j-1, "c")
+    b_cnt = psum[x][y].b_cnt - psum[x][j-1].b_cnt - psum[i-1][y].b_cnt + psum[i-1][j-1].b_cnt
+    c_cnt = psum[x][y].c_cnt - psum[x][j-1].c_cnt - psum[i-1][y].c_cnt + psum[i-1][j-1].c_cnt
     print(a_cnt, b_cnt, c_cnt)
