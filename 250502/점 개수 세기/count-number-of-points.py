@@ -10,7 +10,7 @@ points = SortedSet(list(map(int, input().split())))
 queries = [tuple(map(int, input().split())) for _ in range(q)]
 
 def get_lower_bound(num):
-    idx = 0
+    idx = -1
     l, r = 0, len(points) - 1
     while l <= r:
         m = (l + r) // 2
@@ -22,7 +22,7 @@ def get_lower_bound(num):
     return idx
 
 def get_upper_bound(num):
-    idx = 0
+    idx = -1
     l, r = 0, len(points) - 1
     while l <= r:
         m = (l + r) // 2
