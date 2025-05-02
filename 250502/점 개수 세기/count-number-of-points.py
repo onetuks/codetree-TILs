@@ -6,7 +6,10 @@ input = stdin.readline
 n, q = map(int, input().split())
 psum = [0] * (n + 1)
 mapper = dict()
-points = SortedSet(list(map(int, input().split())))
+points = SortedSet()
+
+for p in list(map(int, input().split())):
+    points.add(p)
 
 def get_lower_bound(num):
     idx = -1
