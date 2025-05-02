@@ -1,4 +1,7 @@
 from sortedcontainers import SortedSet
+from sys import stdin
+
+input = stdin.readline
 
 n, q = map(int, input().split())
 psum = [0] * (n + 1)
