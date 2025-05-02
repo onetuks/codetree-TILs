@@ -4,7 +4,6 @@ from bisect import bisect_left, bisect_right
 n, q = map(int, input().split())
 nums = SortedSet()
 mapper = dict()
-psum = [[0 for _ in range(2*(n+1))] for _ in range(2*(n+1))]
 
 points = [tuple(map(int, input().split())) for _ in range(n)]
 queries = [tuple(map(int, input().split())) for _ in range(q)]
@@ -24,6 +23,7 @@ for num in nums:
     mapper[num] = cnt
     cnt += 1
 
+psum = [[0 for _ in range(cnt + 1)] for _ in range(cnt + 1)]
 for x, y in points:
     psum[mapper[x]][mapper[y]] += 1
 
