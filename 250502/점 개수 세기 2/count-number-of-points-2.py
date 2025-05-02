@@ -1,5 +1,4 @@
 from sortedcontainers import SortedSet
-from bisect import bisect_left, bisect_right
 
 n, q = map(int, input().split())
 nums = SortedSet()
