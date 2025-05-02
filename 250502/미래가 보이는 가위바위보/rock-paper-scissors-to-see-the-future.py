@@ -1,8 +1,8 @@
 N = int(input())
-shapes = [input().strip() for _ in range(n)]
+shapes = [input().strip() for _ in range(N)]
 
-L = [0] * n
-R = [0] * n
+L = [0] * N
+R = [0] * N
 
 for shape in "PHS":
     same_cnt = 0
