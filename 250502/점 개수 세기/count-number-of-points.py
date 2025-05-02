@@ -7,7 +7,6 @@ n, q = map(int, input().split())
 psum = [0] * (n + 1)
 mapper = dict()
 points = SortedSet(list(map(int, input().split())))
-queries = [tuple(map(int, input().split())) for _ in range(q)]
 
 def get_lower_bound(num):
     idx = -1
@@ -45,7 +44,8 @@ for i in range(1, n+1):
 # print(points)
 # print(psum)
 
-for a, b in queries: 
+for _ in range(q):
+    a, b = map(int, input().split())
     na = get_lower_bound(a)
     nb = get_upper_bound(b) + 1
     # print(a,b)
