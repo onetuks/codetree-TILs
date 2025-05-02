@@ -1,39 +1,13 @@
-from sortedcontainers import SortedSet
 from sys import stdin
+from bisect import bisect_left, bisect_right
 
 input = stdin.readline
 
 n, q = map(int, input().split())
 psum = [0] * (n + 1)
 mapper = dict()
-points = SortedSet()
-
-for p in list(map(int, input().split())):
-    points.add(p)
-
-def get_lower_bound(num):
-    idx = -1
-    l, r = 0, len(points) - 1
-    while l <= r:
-        m = (l + r) // 2
-        if points[m] >= num:
-            r = m - 1
-            idx = m
-        else:
-            l = m + 1
-    return idx
-
-def get_upper_bound(num):
-    idx = -1
-    l, r = 0, len(points) - 1
-    while l <= r:
-        m = (l + r) // 2
-        if points[m] <= num:
-            l = m + 1
-            idx = m
-        else:
-            r = m - 1
-    return idx
+points = list(map(int, input().split()))
+points.sort()
 
 cnt = 1
 for p in points:
@@ -44,14 +18,9 @@ for p in points:
 for i in range(1, n+1):
     psum[i] += psum[i-1]
 
-# print(points)
-# print(psum)
-
 for _ in range(q):
     a, b = map(int, input().split())
-    na = get_lower_bound(a)
-    nb = get_upper_bound(b) + 1
-    # print(a,b)
-    # print(na, nb)
+    na = bisect_left(points, a)
+    nb = bisect_right(points, b)
     ans = psum[nb] - psum[na]
     print(ans)
