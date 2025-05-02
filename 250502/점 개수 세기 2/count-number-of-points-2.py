@@ -22,7 +22,7 @@ for num in nums:
     mapper[num] = cnt
     cnt += 1
 
-psum = [[0 for _ in range(cnt + 1)] for _ in range(cnt + 1)]
+psum = [[0 for _ in range(5002)] for _ in range(5002)]
 for x, y in points:
     psum[mapper[x]][mapper[y]] += 1
 
