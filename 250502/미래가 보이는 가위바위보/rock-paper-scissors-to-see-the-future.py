@@ -27,7 +27,7 @@ for i in reversed(range(1, n+1)):
 # print(rp)
 
 ans = 0
-for i in range(2, n+1):
+for i in range(1, n+1):
     # print("hs", lh[i-1], rs[i], lh[i-1] + rs[i])
     # print("hp", lh[i-1], rp[i], lh[i-1] + rp[i])
     # print("sh", ls[i-1], rh[i], ls[i-1] + rh[i])
