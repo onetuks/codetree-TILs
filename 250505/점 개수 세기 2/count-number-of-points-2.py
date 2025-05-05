@@ -13,10 +13,10 @@ points = [tuple(map(int, input().split())) for _ in range(n)]
 queries = [tuple(map(int, input().split())) for _ in range(q)]
 
 def get_lower_bound(num):
-    return nums[bisect_left(nums, num)]
+    return bisect_left(nums, num) + 1
 
 def get_upper_bound(num):
-    return nums[bisect_right(nums, num) - 1]
+    return bisect_right(nums, num)
 
 for x, y in points:
     nums.add(x)
@@ -41,11 +41,9 @@ for i in range(1, cnt + 1):
 #     print(p)
 
 for r, c, x, y in queries:
-    nr = mapper[get_lower_bound(r)]
-    nc = mapper[get_lower_bound(c)]
-    nx = mapper[get_upper_bound(x)]
-    ny = mapper[get_upper_bound(y)]
-    # print(r, c, x, y)
-    # print(nr, nc, nx, ny)
+    nr = get_lower_bound(r)
+    nc = get_lower_bound(c)
+    nx = get_upper_bound(x)
+    ny = get_upper_bound(y)
     ans = psum[nx][ny] - psum[nx][nc-1] - psum[nr-1][ny] + psum[nr-1][nc-1]
     print(ans)
