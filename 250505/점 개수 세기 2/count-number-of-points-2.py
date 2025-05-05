@@ -7,7 +7,7 @@ input = stdin.readline
 n, q = map(int, input().split())
 nums = SortedSet()
 mapper = dict()
-psum = [[0 for _ in range(2 * (n+1))] for _ in range(2 * (n+1))]
+psum = [[0 for _ in range(5002)] for _ in range(5002)]
 
 points = [tuple(map(int, input().split())) for _ in range(n)]
 queries = [tuple(map(int, input().split())) for _ in range(q)]
