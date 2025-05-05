@@ -37,7 +37,7 @@ public class Main {
     }
 
     private static long dfs(int s, int e, boolean isLeaf) {
-        long count = 0;
+        long count = 0L;
         for (int i = s; i <= e; i ++) {
             if (i == s) continue;
             long leftSum = left[i-1] - left[s-1];
