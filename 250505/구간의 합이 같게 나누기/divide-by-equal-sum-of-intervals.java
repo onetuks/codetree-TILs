@@ -16,7 +16,7 @@ public class Main {
 
         arr = new long[n + 2];
         for (int i = 1; i <= n; i ++) {
-            arr[i] = sc.nextInt();
+            arr[i] = sc.nextLong();
         }
 
         left = new long[n + 2];
