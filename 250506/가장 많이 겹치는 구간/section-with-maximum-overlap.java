@@ -1,54 +1,24 @@
 import java.util.*;
-import java.io.*;
-
-class Point implements Comparable<Point> {
-    int x, v;
-
-    Point(int x, int v) {
-        this.x = x;
-        this.v = v;
-    }
-
-    @Override
-    public int compareTo(Point o) {
-        return this.x - o.x;
-    }
-}
 
 public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
 
-    private static final int START = +1;
-    private static final int END = -1;
-
-    private static int answer = 0;
-    private static int n;
-    private static List<Point> points = new ArrayList<>();
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        n = Integer.parseInt(st.nextToken());
+        int[] dp = new int[200_002];
 
         for (int i = 0; i < n; i++) {
-            st = new StringTokenizer(br.readLine());
-            int x1 = Integer.parseInt(st.nextToken());
-            int x2 = Integer.parseInt(st.nextToken());
-            points.add(new Point(x1, START));
-            points.add(new Point(x2, END));
+            int x1 = sc.nextInt();
+            int x2 = sc.nextInt();
+
+            dp[x1] += 1;
+            dp[x2 + 1] -= 1;
         }
-
-        Collections.sort(points);
-
-        int sumVal = 0;
-        for (int i = 0; i < 2 * n; i++) {
-            int x = points.get(i).x;
-            int v = points.get(i).v;
-
-            sumVal += v;
-
-            answer = Math.max(answer, sumVal);
+        
+        int answer = 0;
+        for (int i = 1; i < 200_002; i++) {
+            dp[i] += dp[i-1];
+            answer = Math.max(answer, dp[i]);
         }
 
         System.out.println(answer);
