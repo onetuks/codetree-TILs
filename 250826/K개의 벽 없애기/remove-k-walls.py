@@ -30,11 +30,12 @@ def bfs():
         
         for dx, dy in dlist:
             di, dj = i + dx, j + dy
-            if 0 > di and di >= n and 0 > dj and dj >= n: continue
+            if 0 > di or di >= n or 0 > dj or dj >= n: continue
             elif matrix[di][dj] == 1: continue
             elif t+1 >= dp[di][dj]: continue
             dp[di][dj] = t+1
             heappush(q, (dp[di][dj], di, dj))
+
 
 def dfs(x, y, cnt):
     if cnt == k:
@@ -44,10 +45,11 @@ def dfs(x, y, cnt):
         for j in range(n):
             if i < x: continue
             elif i == x and j <= y: continue
-            else:
+            elif matrix[i][j] == 1:
                 matrix[i][j] = 0
                 dfs(i, j, cnt+1)
                 matrix[i][j] = 1
+
 
 for i in range(n):
     for j in range(n):
