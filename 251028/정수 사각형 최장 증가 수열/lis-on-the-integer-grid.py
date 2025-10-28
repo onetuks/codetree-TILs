@@ -7,6 +7,10 @@ dp[i][j] = 해당 칸을 시작으로 밟을 수 있는 최대 칸 수
 4. DFS 시도시 DP값이 있으면 따로 DFS 진행하지 않고 DP값 return
 '''
 
+import sys
+
+sys.setrecursionlimit(10**6)
+
 INIT = -1
 DLIST = [[0, 1], [0, -1], [1, 0], [-1, 0]]
 
