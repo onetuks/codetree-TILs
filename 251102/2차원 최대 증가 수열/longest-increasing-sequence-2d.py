@@ -14,15 +14,9 @@ dp = [[0 for _ in range(n)] for _ in range(n)]
 dp[0][0] = 1
 
 for i in range(1, n):
-    # 1행 구하기
-    dp[i][1] = 2 if matrix[i][1] > matrix[0][0] else 0
-    # 1열 구하기
-    dp[1][i] = 2 if matrix[1][i] > matrix[0][0] else 0
-
-for i in range(2, n):
-    for j in range(2, n):
-        for k in range(1, i):
-            for l in range(1, j):
+    for j in range(1, n):
+        for k in range(i):
+            for l in range(j):
                 if matrix[i][j] > matrix[k][l]:
                     dp[i][j] = max(dp[i][j], dp[k][l] + 1)
 
