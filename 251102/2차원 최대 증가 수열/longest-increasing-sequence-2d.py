@@ -10,7 +10,8 @@ dp[i][j] = max(self, dp[k][l] + 1) (1 < k < i, 1 < l < j)
 
 n, m = map(int, input().split())
 matrix = [list(map(int, input().split())) for _ in range(n)]
-dp = [[1 for _ in range(n)] for _ in range(n)]
+dp = [[0 for _ in range(n)] for _ in range(n)]
+dp[0][0] = 1
 
 for i in range(1, n):
     # 1행 구하기
