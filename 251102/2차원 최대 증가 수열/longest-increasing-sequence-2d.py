@@ -11,7 +11,7 @@ dp[i][j] = max(self, dp[k][l] + 1) (1 < k < i, 1 < l < j)
 n, m = map(int, input().split())
 matrix = [list(map(int, input().split())) for _ in range(n)]
 dp = [[0 for _ in range(n)] for _ in range(n)]
-dp[0][0] = 1
+dp[0][0] = int(1e9)
 
 for i in range(1, n):
     for j in range(1, n):
@@ -20,4 +20,4 @@ for i in range(1, n):
                 if matrix[i][j] > matrix[k][l]:
                     dp[i][j] = max(dp[i][j], dp[k][l] + 1)
 
-print(max([max(d) for d in dp]))
+print(max([max(d) for d in dp]) - int(1e9) + 1)
