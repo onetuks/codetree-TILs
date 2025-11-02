@@ -1,36 +1,28 @@
 '''
-dp[i][j] = max(dp[i][j], dp[i-k][j-l] + 1) (0 < k < i, 0 < l < j)
+dp[i][j] = max(self, dp[k][l] + 1) (1 < k < i, 1 < l < j)
 
-# 주의점
-- dp 초기값은 0 이어선 안됨
-- 모든 DP값이 동일한 경우 (1, 1) 출발을 보장할 수 없기 때문
-- DP[1][1]에 가중치를 둘 수 있도록 해야함
-- DP[1][1] 만 0으로 두고, 나머지는 주어지는 수 만큼 크게 만들어서 하면 어떨까
+# 에러케이스
+## 1..n 구간을 탐색하는 경우
+- (1, 1) 출발 보장 불가
+- 항상 우하단 1칸 이상이면서 (1, 1) 출발이므로
+- 1열1행의 DP값을 모두 구해둔 뒤, 2열2행부터 DP 구하는 수식따라 진행
 '''
 
-INIT = int(1e4)
-
 n, m = map(int, input().split())
-matrix = [
-    [0 for _ in range(m + 1)]
-    for _ in range(n + 1)
-]
-dp = [
-    [0 for _ in range(m + 1)]
-    for _ in range(n + 1)
-]
-dp[0][0] = INIT
+matrix = [list(map(int, input().split())) for _ in range(n)]
+dp = [[1 for _ in range(n)] for _ in range(n)]
 
-for i in range(1, n + 1):
-    nums = list(map(int, input().split()))
-    for j in range(m):
-        matrix[i][j + 1] = nums[j]
+for i in range(1, n):
+    # 1행 구하기
+    dp[i][1] = 2 if matrix[i][1] > matrix[0][0] else 0
+    # 1열 구하기
+    dp[1][i] = 2 if matrix[1][i] > matrix[0][0] else 0
 
-for i in range(1, n + 1):
-    for j in range(1, m + 1):
-        for k in range(i):
-            for l in range(j):
+for i in range(2, n):
+    for j in range(2, n):
+        for k in range(1, i):
+            for l in range(1, j):
                 if matrix[i][j] > matrix[k][l]:
                     dp[i][j] = max(dp[i][j], dp[k][l] + 1)
 
-print(max(list(max(d) for d in dp)) - INIT)
+print(max([max(d) for d in dp]))
