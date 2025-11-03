@@ -20,7 +20,9 @@ for i in range(n):
     for j in range(i):
         if e[j] < s[i]:
             dp[i] = max(dp[i], dp[j] + p[i])
-        else:
-            dp[i] = max(dp[i], dp[j])
+        # else:
+        #     dp[i] = max(dp[i], dp[j])
 
 print(max(dp))
+
+# print(dp)
