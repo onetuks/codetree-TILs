@@ -12,10 +12,10 @@ grid = [list(map(int, input().split())) for _ in range(n)]
 answer = 0
 
 def out_of_range(i, j):
-    return 0 > i or i >= n or 0 > j or j >= n
+    return 0 > i or i >= n or 0 > j or j >= m
 
 for i in range(n):
-    for j in range(n):
+    for j in range(m):
         for dlist in DLIST:
             sumof = 0
             for dx, dy in dlist:
