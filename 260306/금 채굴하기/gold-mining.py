@@ -16,7 +16,7 @@ def get_cnt(i, j, k):
 
 for i in range(n):
     for j in range(n):
-        for k in range(n):
+        for k in range(2 * (n - 1) + 1):
             cnt = get_cnt(i, j, k)
             if is_profit(k, cnt):
                 ans = max(ans, cnt)
