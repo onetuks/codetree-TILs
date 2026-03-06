@@ -8,13 +8,13 @@ def draw(x1, y1, x2, y2, board):
 
 def check(board):
     for i in range(n):
-        for j in range(n):
+        for j in range(m):
             if board[i][j] >= 2:
                 return True
     return False
 
 def overlapped(x1, y1, x2, y2, x3, y3, x4, y4):
-    board = [[0 for _ in range(n)] for _ in range(n)]
+    board = [[0 for _ in range(m)] for _ in range(n)]
     draw(x1, y1, x2, y2, board)
     draw(x3, y3, x4, y4, board)
     return check(board)
@@ -29,9 +29,9 @@ def rect_sum(x1, y1, x2, y2):
 def find_max_sum_rect(x1, y1, x2, y2):
     max_sum = -1e9
     for i in range(n):
-        for j in range(n):
+        for j in range(m):
             for k in range(i, n):
-                for l in range(j, n):
+                for l in range(j, m):
                     if overlapped(x1, y1, x2, y2, i, j, k, l):
                         continue
                     max_sum = max(
@@ -45,9 +45,9 @@ def find_max_sum():
     max_sum = -1e9
 
     for i in range(n):
-        for j in range(n):
+        for j in range(m):
             for k in range(i, n):
-                for l in range(j, n):
+                for l in range(j, m):
                     max_sum = max(max_sum, find_max_sum_rect(i, j, k, l))
     
     return max_sum
