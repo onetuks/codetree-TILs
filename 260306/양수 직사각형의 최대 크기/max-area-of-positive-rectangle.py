@@ -16,7 +16,7 @@ def get_size(x1, y1, x2, y2):
 for x1 in range(n):
     for y1 in range(m):
         for x2 in range(x1, n):
-            for y2 in range(y1, n):
+            for y2 in range(y1, m):
                 if all_positive(x1, y1, x2, y2):
                     ans = max(ans, get_size(x1, y1, x2, y2))
 
