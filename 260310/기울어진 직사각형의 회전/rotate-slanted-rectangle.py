@@ -10,24 +10,42 @@ def rotate_counter():
     temp = grid[r][c]
     for i in range(m4):
         grid[r][c] = grid[r - 1][c - 1]
-        r -= i
-        c -= i
+        r -= 1
+        c -= 1
     for i in range(m3):
         grid[r][c] = grid[r - 1][c + 1]
-        r -= i
-        c += i
-    # for i in range(m2):
-    #     grid[r][c] = grid[r + 1][c + 1]
-    #     r += i
-    #     c += i
-    # for i in range(m1):
-    #     grid[r][c] = grid[r + 1][c - 1]
-    #     r += i
-    #     c -= i
-    # grid[r - 1][c + 1] = temp
+        r -= 1
+        c += 1
+    for i in range(m2):
+        grid[r][c] = grid[r + 1][c + 1]
+        r += 1
+        c += 1
+    for i in range(m1):
+        grid[r][c] = grid[r + 1][c - 1]
+        r += 1
+        c -= 1
+    grid[r - 1][c + 1] = temp
 
 def rotate_clock():
-    pass
+    global r, c, m1, m2, m3, m4
+    temp = grid[r][c]
+    for i in range(m1):
+        grid[r][c] = grid[r - 1][c + 1]
+        r -= 1
+        c += 1
+    for i in range(m2):
+        grid[r][c] = grid[r - 1][c - 1]
+        r -= 1
+        c -= 1
+    for i in range(m3):
+        grid[r][c] = grid[r + 1][c - 1]
+        r += 1
+        c -= 1
+    for i in range(m4):
+        grid[r][c] = grid[r + 1][c + 1]
+        r += 1
+        c += 1
+    grid[r - 1][c - 1] = temp
 
 if dir == 0: # 반시계
     rotate_counter()
