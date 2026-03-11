@@ -8,7 +8,7 @@ DIRS = ["L", "D", "R", "U"]
 
 def rotate():
     global grid
-    grid = list(zip(*grid[::-1]))
+    grid = list(map(list, zip(*grid[::-1])))
 
 def drop():
     for i in range(4):
@@ -28,12 +28,12 @@ def drop():
         if val != 0:
             merged.append(val)
 
-        print(grid[i])
+        # print(grid[i])
 
-        # for j in range(4):
-        #     grid[i][j] = 0
-        # for j in range(len(merged)):
-        #     grid[i][j] = merged[j]
+        for j in range(4):
+            grid[i][j] = 0
+        for j in range(len(merged)):
+            grid[i][j] = merged[j]
 
 def tilt():
     dir_num = DIRS.index(dir)
