@@ -27,39 +27,21 @@ def drop(exploded):
         for i in reversed(range(n)):
             dropped[i][j] = temp.pop() if temp else 0
     return dropped
-    
-def get_end_idx(arr, idx):
-    val = arr[idx]
-    for i in range(idx + 1, n):
-        if arr[i] == 0:
-            return i - 1
-        if val != arr[i]:
-            return i - 1
-    return n - 1
 
 def get_cnt(dropped):
     cnt = 0
     for i in range(n):
-        idx = 0
-        while idx < n:
-            if dropped[i][idx] == 0:
-                idx += 1
+        for j in range(n - 1):
+            if dropped[i][j] == 0:
                 continue
-            end_idx = get_end_idx(dropped[i], idx)
-            if end_idx - idx == 1:
+            if dropped[i][j] == dropped[i][j + 1]:
                 cnt += 1
-            idx = end_idx + 1
     for j in range(n): 
-        arr = [dropped[i][j] for i in range(n)]
-        idx = 0
-        while idx < n:
-            if dropped[idx][j] == 0:
-                idx += 1
+        for i in range(n - 1):
+            if dropped[i][j] == 0:
                 continue
-            end_idx = get_end_idx(arr, idx)
-            if end_idx - idx == 1:
+            if dropped[i][j] == dropped[i + 1][j]:
                 cnt += 1
-            idx = end_idx + 1
     return cnt
 
 def simulate(i, j):
