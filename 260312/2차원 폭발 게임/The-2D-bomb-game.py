@@ -1,69 +1,62 @@
 n, m, k = map(int, input().split())
-grid = [list(map(int, input().split())) for _ in range(n)]
+numbers_2d = [list(map(int, input().split())) for _ in range(n)]
+numbers_1d = [0 for _ in range(n)]
 
-def count():
-    return sum([
-        1
-        for i in range(n)
-        for j in range(n)
-        if grid[i][j] != 0
-    ])
-
-def rotate():
-    global grid
-    grid = list(map(list, zip(*grid[::-1])))
-
-def drop():
-    for j in range(n):
-        temp = []
-        for i in reversed(range(n)):
-            if grid[i][j] == 0:
-                continue
-            temp.append(grid[i][j])
-        for i in range(n):
-            grid[i][j] = 0
-        for i in range(len(temp)):
-            grid[n - 1 - i][j] = temp[i]
+def get_end_idx(start_idx, num):
+    for end_idx in range(start_idx + 1, len(numbers_1d)):
+        if numbers_1d[end_idx] != num:
+            return end_idx - 1
+    return len(numbers_1d) - 1
 
 def explode():
-    exploded = False
-    for j in range(n):
-        temp = []
-        val, cnt = grid[-1][j], 0
-        for i in reversed(range(n)):
-            if val == grid[i][j]:
-                cnt += 1
-                continue
-            if cnt < m:
-                temp += [val] * cnt
-            else:
+    while True:
+        exploded = False
+        curr_idx = 0
+
+        while curr_idx < len(numbers_1d):
+            end_idx = get_end_idx(curr_idx, numbers_1d[curr_idx])
+
+            if end_idx - curr_idx + 1 >= m:
+                del numbers_1d[curr_idx:end_idx + 1]
                 exploded = True
-            val = grid[i][j]
-            cnt = 1
-        if 0 < cnt < m:
-            temp += [val] * cnt
+            else:
+                curr_idx = end_idx + 1
 
-        for i in range(n):
-            grid[i][j] = 0
-        for i in range(len(temp)):
-            grid[n - 1 - i][j] = temp[i]
-    return exploded
+        if not exploded:
+            break
 
-curr_time = 0
-while explode() or curr_time < k:
-    curr_time += 1
-    drop()
-    while explode():
-        continue
-    # print("after explosion")
-    # for g in grid:
-    #     print(g)
-    # print()
+def rotate():
+    global numbers_2d
+    numbers_2d = list(map(list, zip(*numbers_2d[::-1])))
+
+def copy_col(col):
+    global numbers_1d
+
+    numbers_1d = [
+        numbers_2d[row][col]
+        for row in range(n)
+        if numbers_2d[row][col] != 0
+    ]
+
+def copy_result(col):
+    for row in reversed(range(n)):
+        numbers_2d[row][col] = numbers_1d.pop() if numbers_1d else 0
+
+def simulate():
+    for col in range(n):
+        copy_col(col)
+        explode()
+        copy_result(col)
+
+simulate()
+for _ in range(k):
     rotate()
-    drop()
-    # print("after rotate")
-    # for g in grid:
-    #     print(g)
-    # print()
+    simulate()
 
-print(count())
+ans = sum([
+    numbers_2d[i][j] != 0
+    for i in range(n)
+    for j in range(n) 
+])
+
+print(ans)
