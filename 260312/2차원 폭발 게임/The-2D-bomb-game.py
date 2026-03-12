@@ -53,15 +53,15 @@ curr_time = 0
 while explode() or curr_time < k:
     curr_time += 1
     drop()
-    # print("after explosion")
-    # for g in grid:
-    #     print(g)
-    # print()
+    print("after explosion")
+    for g in grid:
+        print(g)
+    print()
     rotate()
     drop()
-    # print("after rotate")
-    # for g in grid:
-    #     print(g)
-    # print()
+    print("after rotate")
+    for g in grid:
+        print(g)
+    print()
 
 print(count())
