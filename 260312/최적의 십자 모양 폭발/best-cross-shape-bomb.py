@@ -1,62 +1,66 @@
 n = int(input())
 grid = [list(map(int, input().split())) for _ in range(n)]
+temp = [[0 for _ in range(n)] for _ in range(n)]
 
-def explode(r, c):
-    exploded = [grid[i][:] for i in range(n)]
-    power = exploded[r][c]
-    exploded[r][c] = 0
-    for i in range(power):
-        if 0 <= c - i < n:
-            exploded[r][c - i] = 0
-        if 0 <= c + i < n:
-            exploded[r][c + i] = 0
-        if 0 <= r - i < n:
-            exploded[r - i][c] = 0
-        if 0 <= r + i < n:
-            exploded[r + i][c] = 0
-    return exploded
-    
-def drop(exploded):
-    dropped = [exploded[i][:] for i in range(n)]
+def save_grid():
+    for i in range(n):
+        for j in range(n):
+            temp[i][j] = grid[i][j]
+
+def load_grid():
+    for i in range(n):
+        for j in range(n):
+            grid[i][j] = temp[i][j]
+
+def drop():
     for j in range(n):
         temp = []
-        for i in reversed(range(n)):
-            if exploded[i][j] == 0:
+        for i in range(n):
+            if grid[i][j] == 0:
                 continue
-            temp.append(exploded[i][j])
+            temp.append(grid[i][j])
         for i in reversed(range(n)):
-            dropped[i][j] = temp.pop() if temp else 0
-    return dropped
+            grid[i][j] = temp.pop() if temp else 0
 
-def get_cnt(dropped):
+def explode(r, c):
+    power = grid[r][c]
+    grid[r][c] = 0
+    for i in range(power):
+        if 0 <= c - i < n:
+            grid[r][c - i] = 0
+        if 0 <= c + i < n:
+            grid[r][c + i] = 0
+        if 0 <= r - i < n:
+            grid[r - i][c] = 0
+        if 0 <= r + i < n:
+            grid[r + i][c] = 0
+    drop()
+
+def calc():
+    dlist = [[-1, 0], [1, 0], [0, -1], [0, 1]]
     cnt = 0
     for i in range(n):
-        for j in range(n - 1):
-            if dropped[i][j] == 0:
-                continue
-            if dropped[i][j] == dropped[i][j + 1]:
-                cnt += 1
-    for j in range(n): 
-        for i in range(n - 1):
-            if dropped[i][j] == 0:
-                continue
-            if dropped[i][j] == dropped[i + 1][j]:
-                cnt += 1
-    return cnt
+        for j in range(n):
+            for dx, dy in dlist:
+                di, dj = i + dx, j + dy
+                if 0 > di or di >= n or 0 > dj or dj >= n:
+                    continue
+                if grid[di][dj] == 0:
+                    continue
+                if grid[i][j] == grid[di][dj]:
+                    cnt += 1
+    return cnt // 2
 
-def simulate(i, j):
-    exploded = explode(i, j)
-    dropped = drop(exploded)
-    cnt = get_cnt(dropped)
-    # for g in dropped:
-    #     print(g)
-    # print(cnt)
-    # print()
-    return cnt
-
-ans = 0
+ans = 0 
 for i in range(n):
     for j in range(n):
-        ans = max(ans, simulate(i, j))
+        save_grid()
+        explode(i, j)
+        ans = max(ans, calc())
+        # print(ans)
+        # for g in grid:
+        #     print(g)
+        load_grid()
 
 print(ans)
+
