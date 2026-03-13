@@ -2,53 +2,54 @@ import sys
 sys.setrecursionlimit(10 ** 6)
 
 n = int(input())
-x, y = map(int, input().split())
-x -= 1
-y -= 1
+curr_x, curr_y = map(int, input().split())
+curr_x -= 1
+curr_y -= 1
+curr_dir = 0
 
 grid = [[ch for ch in input()] for _ in range(n)]
+visited = [[[False for _ in range(4)] for _ in range(n)] for _ in range(n)]
 dlist = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 
-ans = -1
-block = -100
+ans = 0
 
-def no_right_block(i, j, curr_dir):
-    right_dir = (curr_dir + 1) % 4
-    di, dj = i + dlist[right_dir][0], j + dlist[right_dir][1]
-    if 0 <= di < n and 0 <= dj < n:
-        return grid[di][dj] != '#'
-    return False
+def in_range(i, j):
+    return 0 <= i < n and 0 <= j < n
 
-def out_of_range(i, j):
-    return 0 > i or i >= n or 0 > j or j >= n
+def wall_exists(i, j):
+    return in_range(i, j) and grid[i][j] == "#"
 
-def no_straight_block(i, j, d):
-    di, dj = i + dlist[d][0], j + dlist[d][1]
-    if out_of_range(di, dj):
-        return True
-    return grid[di][dj] != '#'
+def simulate():
+    global curr_x, curr_y, curr_dir, ans
 
-def dfs(i, j, dir):
-    # print(i, j, dir)
-    if out_of_range(i, j):
-        return 0
-    if no_right_block(i, j, dir):
-        d = (dir + 1) % 4
-        di, dj = i + dlist[d][0], j + dlist[d][1]
-        cnt = dfs(di, dj, d)
-        if cnt == -1:
-            return cnt
-        return cnt + 1
-    for idx in range(4):
-        d = (dir - idx + 4) % 4
-        if no_straight_block(i, j, d):
-            di, dj = i + dlist[d][0], j + dlist[d][1]
-            cnt = dfs(di, dj, d)
-            if cnt == -1:
-                return cnt
-            return cnt + 1
-    return -1
+    if visited[curr_x][curr_y][curr_dir]:
+        print(-1)
+        sys.exit(0)
+    
+    visited[curr_x][curr_y][curr_dir] = True
 
-ans = dfs(x, y, 0)
+    next_x, next_y = curr_x + dlist[curr_dir][0], curr_y + dlist[curr_dir][1]
+
+    if not in_range(next_x, next_y):
+        curr_x, curr_y = next_x, next_y
+        ans += 1
+        return
+    elif wall_exists(next_x, next_y):
+        curr_dir = (curr_dir + 3) % 4
+    else:
+        rx = next_x + dlist[(curr_dir + 1) % 4][0]
+        ry = next_y + dlist[(curr_dir + 1) % 4][1]
+
+        if wall_exists(rx, ry):
+            curr_x, curr_y = next_x, next_y
+            ans += 1
+        else:
+            curr_x, curr_y = rx, ry
+            curr_dir = (curr_dir + 1) % 4
+            ans += 2
+
+while in_range(curr_x, curr_y):
+    simulate()
 
 print(ans)
+
