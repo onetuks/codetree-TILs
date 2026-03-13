@@ -5,7 +5,7 @@ k -= 1
 
 def get_max_height():
     for i in range(n):
-        for j in range(k, k + m - 1):
+        for j in range(k, k + m):
             if grid[i][j] != 0:
                 return i - 1
     return n - 1
