@@ -1,12 +1,14 @@
 n, m, k = map(int, input().split())
 grid = [list(map(int, input().split())) for _ in range(n)]
 
+k -= 1
+
 def get_max_height():
     for i in range(n):
-        for j in range(k, k + m):
+        for j in range(k, k + m - 1):
             if grid[i][j] != 0:
-                return i
-    return 0
+                return i - 1
+    return n - 1
 
 i = get_max_height()
 
