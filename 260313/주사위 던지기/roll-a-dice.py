@@ -77,8 +77,9 @@ class Dice:
 
 dice = Dice(r - 1, c - 1)
 
+grid[dice.r][dice.c] = dice.bottom
+
 for direction in directions:
-    grid[dice.r][dice.c] = dice.bottom
     if direction == "L":
         dice.roll_left()
     elif direction == "U":
@@ -87,6 +88,7 @@ for direction in directions:
         dice.roll_down()
     else:
         dice.roll_right()
+    grid[dice.r][dice.c] = dice.bottom
 
 ans = 0
 for g in grid:
