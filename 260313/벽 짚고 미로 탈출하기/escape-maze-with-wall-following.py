@@ -1,14 +1,12 @@
 import sys
-sys.setrecursionlimit(10 ** 6)
 
 n = int(input())
-curr_x, curr_y = map(int, input().split())
-curr_x -= 1
-curr_y -= 1
-curr_dir = 0
+x, y = map(int, input().split())
+x -= 1
+y -= 1
+cx, cy, cd = x, y, 0
 
-grid = [[ch for ch in input()] for _ in range(n)]
-visited = [[[False for _ in range(4)] for _ in range(n)] for _ in range(n)]
+grid = [[i for i in input()] for _ in range(n)]
 dlist = [[0, 1], [1, 0], [0, -1], [-1, 0]]
 
 ans = 0
@@ -17,39 +15,29 @@ def in_range(i, j):
     return 0 <= i < n and 0 <= j < n
 
 def wall_exists(i, j):
-    return in_range(i, j) and grid[i][j] == "#"
+    return grid[i][j] == '#'
 
-def simulate():
-    global curr_x, curr_y, curr_dir, ans
+while in_range(cx, cy):
+    # print(cx, cy, cd) 
+    nx, ny = cx + dlist[cd][0], cy + dlist[cd][1]
 
-    if visited[curr_x][curr_y][curr_dir]:
+    if not in_range(nx, ny):
+        ans += 1
+        cx, cy = nx, ny
+    elif wall_exists(nx, ny):
+        cd = (cd + 3) % 4
+    else:
+        rx, ry = nx + dlist[(cd + 1) % 4][0], ny + dlist[(cd + 1) % 4][1]
+        if not wall_exists(rx, ry):
+            cx, cy = rx, ry
+            cd = (cd + 1) % 4
+            ans += 2
+        else:
+            cx, cy = nx, ny
+            ans += 1
+
+    if cx == x and cy == y and cd == 0:
         print(-1)
         sys.exit(0)
-    
-    visited[curr_x][curr_y][curr_dir] = True
-
-    next_x, next_y = curr_x + dlist[curr_dir][0], curr_y + dlist[curr_dir][1]
-
-    if not in_range(next_x, next_y):
-        curr_x, curr_y = next_x, next_y
-        ans += 1
-        return
-    elif wall_exists(next_x, next_y):
-        curr_dir = (curr_dir + 3) % 4
-    else:
-        rx = next_x + dlist[(curr_dir + 1) % 4][0]
-        ry = next_y + dlist[(curr_dir + 1) % 4][1]
-
-        if wall_exists(rx, ry):
-            curr_x, curr_y = next_x, next_y
-            ans += 1
-        else:
-            curr_x, curr_y = rx, ry
-            curr_dir = (curr_dir + 1) % 4
-            ans += 2
-
-while in_range(curr_x, curr_y):
-    simulate()
 
 print(ans)
-
