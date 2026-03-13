@@ -14,12 +14,11 @@ ans = []
 def dfs(i, j):
     for dx, dy in DLIST:
         di, dj = i + dx, j + dy
-        if 0 > di or di >= n or 0 > dj or dj >= n:
+        if 1 > di or di > n or 1 > dj or dj > n:
             continue
         if visited[di][dj]:
             continue
         if a[i][j] < a[di][dj]:
-            # print(a[i][j], a[di][dj], "(",i,j,"),", "(",di,dj,")")
             visited[di][dj] = True
             ans.append(a[di][dj])
             dfs(di, dj)
