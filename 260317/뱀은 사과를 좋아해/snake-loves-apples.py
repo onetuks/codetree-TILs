@@ -40,16 +40,19 @@ class Snake:
             di = cx + DLIST[DMAP[dir]][0] * i
             dj = cy + DLIST[DMAP[dir]][1] * i
             if self._out_of_range(di, dj):
+                # print("out of range")
                 return False
-            elif self._overlapped(di, dj):
-                return False
-
+            
             if self._apple_exists(di, dj):
-                self.queue.appendleft((di, dj))
                 locations.remove((di, dj))
             else:
-                self.queue.appendleft((di, dj))
                 self.queue.pop()
+
+            if self._overlapped(di, dj):
+                # print("overlapped")
+                return False
+            
+            self.queue.appendleft((di, dj))
         return True
 
 snake = Snake()
@@ -58,5 +61,6 @@ for dir, cnt in commands:
     result = snake.move(dir, cnt)
     if not result:
         break
+    # print(snake.time, snake.queue)
 
 print(snake.time)
