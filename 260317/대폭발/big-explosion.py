@@ -28,8 +28,8 @@ def print_grid():
 
 def spread(i, j, t):
     for dx, dy in dlist:
-        di = i + dx * t
-        dj = j + dy * t
+        di = i + dx * (2 ** (t - 1))
+        dj = j + dy * (2 ** (t - 1))
         if 0 <= di < n and 0 <= dj < n:
             temp[di][dj] = True
 
